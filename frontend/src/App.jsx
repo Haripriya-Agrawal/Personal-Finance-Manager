@@ -1,0 +1,29 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import LoginPage from './pages/LoginPage'; // Replace with your actual file path
+import Dashboard from './pages/Dashboard'; // Replace with your actual file path
+import SignupPage from './pages/SignupPage'; // Replace with your actual file path
+import Expenses from './pages/Expenses';
+
+import './App.css';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        {/* Route for Login */}
+        <Route path="/" element={<LoginPage />} />
+
+        {/* Route for Signup */}
+        <Route path="/signup" element={<SignupPage />} />
+
+        {/* Route for Dashboard */}
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/expenses" element={<Expenses />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
