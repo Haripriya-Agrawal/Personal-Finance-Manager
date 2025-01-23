@@ -1,6 +1,7 @@
 import React from "react";
 import Dashboard from "../pages/Dashboard";
 import Expenses from "../pages/Expenses";
+import Analytics from "../pages/Analytics";
 
 const Navbar = () => {
   return (
@@ -10,7 +11,7 @@ const Navbar = () => {
         <span className="mx-1">•</span>
         <a href="Expenses" className="hover:underline text-text">Expenses</a>
         <span className="mx-1">•</span>
-        <a href="#" className="hover:underline text-text">Analytics</a>
+        <a href="Analytics" className="hover:underline text-text">Analytics</a>
         <span className="mx-1">•</span>
         <a href="#" className="hover:underline text-text">Savings</a>
         <span className="mx-1">•</span>
