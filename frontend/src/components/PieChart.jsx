@@ -16,23 +16,29 @@ const PieChart = () => {
       {
         data: [5, 5, 10, 2, 4],
         backgroundColor: ['#73BBA3', '#88D66C', '#B4E380', '#F6FB7A', '#BFF6C3'],
-        borderColor: 'transparent', // Removes border
-        borderWidth: 0,             // Sets border width to 0
+        borderColor: 'transparent',
+        borderWidth: 0,
       },
     ],
   };
 
   const options = {
+    responsive: true, // Ensures the chart scales with the container
+    maintainAspectRatio: false, // Disables the fixed aspect ratio
     plugins: {
       legend: {
         labels: {
-          color: '#EFE3C2', // Set legend text color (e.g., white)
+          color: '#EFE3C2',
         },
       },
     },
   };
 
-  return <Pie data={data} options={options} />;
+  return (
+    <div className="h-full w-full">
+      <Pie data={data} options={options} />
+    </div>
+  );
 };
 
 export default PieChart;

@@ -20,8 +20,8 @@ const LineChart = () => {
       {
         label: "Cumulative Spending",
         data: [100, 250, 400, 600, 900, 1200, 1500], // Example data
-        borderColor: "#4F46E5", // Tailwind indigo-600
-        backgroundColor: "rgba(79, 70, 229, 0.2)", // Transparent indigo
+        borderColor: "#21E6C1", // Tailwind indigo-600
+        backgroundColor: "greenMedium", // Transparent indigo
         tension: 0.4, // Smooth curve
         fill: true, // Fills area under the curve
       },
@@ -30,18 +30,19 @@ const LineChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: true,
         position: "top",
         labels: {
-          color: "#1E293B", // Tailwind slate-800 for labels
+          color: "#21E6C1", // Tailwind slate-800 for labels
         },
       },
       title: {
-        display: true,
+        display: false,
         text: "Cumulative Spending Over Time",
-        color: "#1E293B",
+        color: "#21E6C1",
         font: {
           size: 18,
         },
@@ -50,7 +51,7 @@ const LineChart = () => {
     scales: {
       x: {
         ticks: {
-          color: "#1E293B", // Tailwind slate-800 for x-axis ticks
+          color: "#21E6C1", // Tailwind slate-800 for x-axis ticks
         },
         grid: {
           display: false, // Hide x-axis gridlines
@@ -58,17 +59,17 @@ const LineChart = () => {
       },
       y: {
         ticks: {
-          color: "#1E293B", // Tailwind slate-800 for y-axis ticks
+          color: "#21E6C1", // Tailwind slate-800 for y-axis ticks
         },
         grid: {
-          color: "#E5E7EB", // Tailwind gray-300 for gridlines
+          color: "#21E6C1", // Tailwind gray-300 for gridlines
         },
       },
     },
   };
 
   return (
-    <div className="p-4 bg-white rounded shadow-md">
+    <div className="p-4 bg-none rounded ">
       <Line data={data} options={options} />
     </div>
   );
