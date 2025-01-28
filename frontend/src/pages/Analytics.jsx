@@ -6,7 +6,7 @@ import PieChart from "../components/PieChart";
 
 const Analytics = () => {
   return (
-    <div className="bg-greenDeep text-text min-h-screen w-full overflow-x-hidden p-6">
+    <div className="bg-greenDeep text-text min-h-screen w-full overflow-x-hidden p-12">
       {/* Navbar */}
       <Navbar />
 

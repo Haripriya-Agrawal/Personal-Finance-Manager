@@ -5,8 +5,10 @@ import Dashboard from './pages/Dashboard'; // Replace with your actual file path
 import SignupPage from './pages/SignupPage'; // Replace with your actual file path
 import Expenses from './pages/Expenses';
 import Analytics from './pages/Analytics';
+import Savings from './pages/Savings';
 
 import './App.css';
+
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/expenses" element={<Expenses />} />
 
         <Route path="/analytics" element={<Analytics/>} />
+
+        <Route path="/savings" element={<Savings/>} />
 
 
       </Routes>

@@ -7,7 +7,7 @@ const Dashboard = () => {
   <div className="bg-greenDeep text-text min-h-screen p-12">
       <Navbar/>
 
-   <div className="flex flex-row  overflow-hidden">
+   <div className="flex flex-row ">
       <div>
       {/* Main Content */}
       <div className="w-4/6 grid grid-cols-[200px,200px,200px,320px] gap-6">

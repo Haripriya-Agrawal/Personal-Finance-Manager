@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        greenDeep: "#2C2828", // Example dark blue
+        greenDeep: "#021526", // Example dark blue
         greenMedium: "#1F4287", // Example grayish blue
         greenLight: "#278EA5", // Example green
         warning: "#f59e0b", // Example yellow

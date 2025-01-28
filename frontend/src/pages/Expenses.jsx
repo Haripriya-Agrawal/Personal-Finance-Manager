@@ -42,7 +42,7 @@ const Expenses = () => {
   });
 
   return (
-    <div className="min-h-screen bg-greenDeep text-text p-6">
+    <div className="min-h-screen bg-greenDeep text-text p-12">
       <Navbar />
 
 
