@@ -147,8 +147,8 @@ const Savings = () => {
             {/* Pie Chart */}
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg w-full sm:w-1/2">
               <h2 className="text-base text-text text-text sm:text-lg font-bold mb-2 sm:mb-4">Total Savings Pie Chart</h2>
-              <div className="h-40 bg-greenLight rounded-lg flex justify-center items-center">
-                <p>Pie Chart Placeholder</p>
+              <div className=" bg-greenLight bg-opacity-20 rounded-lg">
+                <PieChart className="h-full w-full" />
               </div>
             </div>
 
