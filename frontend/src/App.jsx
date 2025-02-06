@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage'; // Replace with your actual file pa
 import Expenses from './pages/Expenses';
 import Analytics from './pages/Analytics';
 import Savings from './pages/Savings';
+import BudgetsPage from './pages/BudgetsPage';
 
 import './App.css';
 
@@ -28,6 +29,8 @@ function App() {
         <Route path="/analytics" element={<Analytics/>} />
 
         <Route path="/savings" element={<Savings/>} />
+
+        <Route path="/budgets" element={<BudgetsPage/>} />
 
 
       </Routes>

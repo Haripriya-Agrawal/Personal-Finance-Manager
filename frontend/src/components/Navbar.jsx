@@ -3,6 +3,7 @@ import Dashboard from "../pages/Dashboard";
 import Expenses from "../pages/Expenses";
 import Analytics from "../pages/Analytics";
 import Savings from "../pages/Savings";
+import budgets from "../pages/BudgetsPage";
 
 const Navbar = () => {
   return (
@@ -16,7 +17,7 @@ const Navbar = () => {
         <span className="mx-1">•</span>
         <a href="Savings" className="hover:underline text-text">Savings</a>
         <span className="mx-1">•</span>
-        <a href="#" className="hover:underline text-text">Budgets</a>
+        <a href="budgets" className="hover:underline text-text">Budgets</a>
       </nav>
     </div>
   );
