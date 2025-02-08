@@ -7,8 +7,7 @@ const Expenses = () => {
   const [expenses, setExpenses] = useState([
     { id: 1, title: "Groceries", amount: 50, category: "Food", date: "2025-01-20" },
     { id: 2, title: "Uber Ride", amount: 15, category: "Transportation", date: "2025-01-21" },
-    { id: 3, title: "Movie Night", amount: 20, category: "Entertainment", date: "2025-01-19" },
-  ]);
+]);
 
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({ category: "", minAmount: "", maxAmount: "" });

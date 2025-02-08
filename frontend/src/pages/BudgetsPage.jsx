@@ -3,11 +3,13 @@ import React from "react";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import LineChart from "../components/LineChart";
+import BudgetChart from "../components/BudgetChart";
+import PieChart from "../components/PieChart";
 
 
 const BudgetsPage=()=>{
     return (
-        <div className=" Wholepage w-full h-screen bg-greenDeep p-12 m-0">
+        <div className=" Wholepage w-full h-full bg-greenDeep p-12 m-0">
             <Navbar/>
              
 
@@ -15,9 +17,9 @@ const BudgetsPage=()=>{
             <div className="flex flex-row gap-6">
 
             <div className="flex flex-col w-1/3 gap-6 text-text">   {/*Add Budgets and Current Budgets col */}
-                <div className="h-full w-full bg-greenMedium bg-opacity-30 p-6 rounded-lg">
-                    <h1 className="text-xl text-text mt-3 mb-3">Add/Edit Budget</h1>
-                    <form className="space-y-2 sm:space-y-3">
+                <div className="h-1/3 w-full bg-greenMedium bg-opacity-30 p-6 rounded-lg">
+                    <h1 className="text-xl text-text font-semibold mb-3">Add-Edit Budget</h1>
+                    <form className="space-y-2 mt-2 sm:space-y-3">
 
               <div className="flex flex-col sm:flex-row gap-2">
                 <input
@@ -71,29 +73,9 @@ const BudgetsPage=()=>{
 
 
                 <div className="h-full w-full bg-greenMedium bg-opacity-30 p-6 rounded-lg ">
-                    <h1 className="text-xl text-text mb-2" >Remaining budget</h1>
-                    <div className="flex flex-col mt-6 gap-6">
-
-                    <div>
-                        <h1 className="text-lg text-text">Food</h1>
-                        <div className="border-[2px] border-greenLight  h-[20px] rounded-lg">
-                          <div className="w-3/5 h-full bg-text rounded-lg"></div>
-                        </div>
-                          
-                    </div>
-                    <div>
-                        <h1 className="text-lg text-text">Travel</h1>
-                        <div className=" border-[2px] border-greenLight  h-[20px] rounded-lg">
-                          <div className="w-2/5 h-full bg-text rounded-lg"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <h1 className="text-lg text-text">Shopping</h1>
-                        <div className=" border-[2px] border-greenLight  h-[20px] rounded-lg">
-                          <div className="w-4/5 h-full bg-text rounded-lg"></div>
-                        </div>
-                    </div>
-
+                    <h1 className="text-xl text-text mb-6" >Category wise budget</h1>
+                    <div className="h-72">
+                      <PieChart/>
                     </div>
                     
 
@@ -105,18 +87,21 @@ const BudgetsPage=()=>{
 
 
             <div className="flex flex-row h-full w-full gap-6">
-              <div className="h-full w-2/5 border">
               
+            <div className="h-full w-2/5  p-6 bg-greenMedium bg-opacity-30 rounded-lg">
               {/* Insights */}
-              <h1>Insights</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, culpa omnis. Fugiat harum qui quidem quibusdam modi laborum earum, deserunt iure quod magni delectus ipsum quia, perferendis quis dolorum illo!</p>
-              
+              <h1 className="text-xl text-text font-semibold mb-6">Insights</h1>
+              <p className="text-l text-text font-medium">Spent 30% more than expected on Food.</p>
               </div>
-              <div className="h-full w-3/5 border">Category vise budget pie chart</div>
+
+              <div className="h-full w-3/5 bg-greenMedium bg-opacity-30 p-6 rounded-lg">
+              <h1 className="text-xl mb-6 text-text font-semibold">Remaining Budget</h1>
+              <BudgetChart/>
+              </div>
             </div>
 
-            <div className="flex flex-row h-full w-full gap-2">
-              <div className="h-full w-full  bg-greenMedium bg-opacity-30 rounded-lg p-6">
+          <div className="flex flex-row h-96 w-full gap-2  ">
+            <div className="h-full w-full  bg-greenMedium bg-opacity-30 rounded-lg p-6">
                 <div className="flex flex-row gap-20  justify-center items-center">
                 <h3 className="text-xl font-bold text-text ">Allocation Budget</h3>
                 <div className="flex gap-2">
@@ -126,9 +111,9 @@ const BudgetsPage=()=>{
                 <button className=" py-0 px-3 text-text bg-greenLight bg-opacity-30">Export</button>
                 </div>
 
-                <div className="mt-6 h-auto w-full ">
+                <div className="h-72 mt-6 flex items-center justify-center">
                   {/* Chart goes here  */}
-                  <LineChart/>
+                  <BudgetChart className="h-auto"/>
                 </div>
                 
               </div>
