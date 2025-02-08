@@ -6,7 +6,7 @@ function SignupPage() {
     <div className="flex min-h-screen w-screen items-center justify-center bg-gray-900 text-gray-200">
       <div className="w-full max-w-4xl bg-gray-800 rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 overflow-hidden">
         {/* Left Section */}
-        <div className="hidden md:flex flex-col justify-between bg-gradient-to-br from-purple-700 to-indigo-900 p-8">
+        <div className="hidden md:flex flex-col justify-between bg-gradient-to-br from-greenMedium to-greenLight p-8">
           <h2 className="text-3xl font-bold text-white">Your Wealth, Evolved</h2>
           <h2 className="text-3xl font-bold text-white"></h2>
           <p className="text-gray-300 mt-auto">A beautiful journey starts here.</p>
@@ -91,7 +91,7 @@ function SignupPage() {
               <input
                 type="checkbox"
                 id="terms"
-                className="mr-2 h-4 w-4 text-purple-600 bg-gray-700 rounded border-gray-600 focus:ring-2 focus:ring-purple-500"
+                className="mr-2 h-4 w-4 text-text bg-gray-700 rounded border-gray-600 focus:ring-2 focus:ring-purple-500"
               />
               <label htmlFor="terms" className="text-gray-400">
                 I agree to the{" "}
@@ -104,7 +104,7 @@ function SignupPage() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
+              className="w-full bg-greenLight text-white py-2 rounded-md hover:bg-purple-700 transition"
             >
               Create account
             </button>
