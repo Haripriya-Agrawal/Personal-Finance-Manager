@@ -1,29 +1,28 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-const savingsSchema = new mongoose.Schema({
+// budget to spend on a category
+const budgetSchema = new mongoose.Schema({
 	userId: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
-	goalName: { type: String, required: true },
+	category: { type: String, required: true },
 	targetAmount: { type: Number, required: true },
-	currentAmount: { type: Number, default: 0 },
+	spentAmount: { type: Number, default: 0 },
 	startDate: { type: Date, required: true },
-	endDate: { type: Date, required: true },
-	status: { type: String, enum: ["in-progress", "completed"], default: "in-progress" },
+	endDate: { type: Date, required: true }
 }, { timestamps: true });
 
-const Savings = mongoose.model("savings", savingsSchema);
+const Budget = mongoose.model("budget", budgetSchema);
 
-const validateSavings = (data) => {
+const validateBudget = (data) => {
 	const schema = Joi.object({
 		userId: Joi.string().required().label("User ID"),
-		goalName: Joi.string().required().label("Goal Name"),
+		category: Joi.string().required().label("Goal Name"),
 		targetAmount: Joi.number().positive().required().label("Target Amount"),
-		currentAmount: Joi.number().min(0).label("Current Amount"),
+		spentAmount: Joi.number().min(0).label("Spent Amount"),
 		startDate: Joi.date().required().label("Start Date"),
-		endDate: Joi.date().required().label("End Date"),
-		status: Joi.string().valid("in-progress", "completed").label("Status"),
+		endDate: Joi.date().required().label("End Date")
 	});
 	return schema.validate(data);
 };
 
-module.exports = { Savings, validateSavings };
+module.exports = { Budget, validateBudget };

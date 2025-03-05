@@ -1,15 +1,11 @@
+const mongoose = require("mongoose");
 
-const mongoose = require('mongoose');
-
-const connectDB = async () => {
-    try {
-        await mongoose.connect('mongodb://localhost:27017/financeManager', {
-        });
-        console.log("MongoDB connected...");
-    } catch (err) {
-        console.error("MongoDB connection error:", err);
-        process.exit(1); 
+module.exports = ()=> {
+    try{
+        mongoose.connect(process.env.DB);
+        console.log("Connected to DB")
+    }catch(error){
+        console.log(error);
+        console.log("Not connected to DB")
     }
 };
-
-module.exports = connectDB;

@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
+
+
+// not required
+
+
+
+
 const analyticsSchema = new mongoose.Schema({
 	userId: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
 	totalExpenses: { type: Number, default: 0 },
