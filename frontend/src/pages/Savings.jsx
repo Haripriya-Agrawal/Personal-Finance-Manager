@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import PieChart from "../components/PieChart";
+import { Plus } from "lucide-react";
+
 
 const Savings = () => {
   return (
@@ -46,11 +48,11 @@ const Savings = () => {
                   placeholder="Amount saved"
                   className="w-full p-2 rounded-lg bg-greenLight placeholder-gray-400"
                 />
-                <input
+                {/* <input
                   type="text"
                   placeholder="Frequency"
                   className="w-full p-2 rounded-lg bg-greenLight placeholder-gray-400"
-                />
+                /> */}
               </div>
 
               <button
@@ -81,27 +83,29 @@ const Savings = () => {
               <li className="flex justify-between">
                 <span>Beach Trip</span>
                 <span>50%</span>
-                <span>10-10-25</span>
+                <button className="p-2 bg-none"> Add Funds </button>
               </li>
               <li className="flex justify-between">
                 <span>Emergency</span>
                 <span>25%</span>
-                <span>10-10-25</span>
+                <button className="p-2 bg-none"> Add Funds </button>
+                
               </li>
               <li className="flex justify-between">
                 <span>Car</span>
                 <span>70%</span>
-                <span>10-10-25</span>
+                <button className="p-2 bg-none"> Add Funds </button>
               </li>
               <li className="flex justify-between">
                 <span>Coach Bag</span>
                 <span>20%</span>
-                <span>10-10-25</span>
+                <button className="p-2 bg-none"> Add Funds </button>
               </li>
               <li className="flex justify-between">
                 <span>Home</span>
                 <span>30%</span>
-                <span>10-10-25</span>
+                <button className="p-2 bg-none"> Add Funds </button>
+                
               </li>
             </ul>
           </div> 

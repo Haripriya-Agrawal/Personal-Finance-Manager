@@ -49,7 +49,7 @@ function SignupPage() {
             />
 
             {/* Income Range */}
-            <div>
+            {/* <div>
              
               <select
                 className="w-full px-4 py-2 bg-gray-700 text-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -60,7 +60,7 @@ function SignupPage() {
                 <option value="50k-100k">50k - 100k</option>
                 <option value="100k+">100k+</option>
               </select>
-            </div>
+            </div> */}
 
             {/* User Type */}
             <div>
