@@ -63,29 +63,7 @@ function SignupPage() {
             </div> */}
 
             {/* User Type */}
-            <div>
-              
-              <select
-                className="w-full px-4 py-2 bg-gray-700 text-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              >
-                <option value="">Select your user type</option>
-                <option value="students">Students</option>
-                <option value="working-professionals">Working Professionals</option>
-                <option value="freelancers">Freelancers/Contractors</option>
-                <option value="remote-workers">Remote Workers/Digital Nomads</option>
-                <option value="small-business-owners">Small Business Owners</option>
-                <option value="entrepreneurs">Entrepreneurs</option>
-                <option value="families">Families & Homemakers</option>
-                <option value="investors">Investors</option>
-                <option value="crypto-traders">Crypto Traders</option>
-                <option value="retirees">Retirees & Pensioners</option>
-                <option value="travel-enthusiasts">Travel Enthusiasts</option>
-                <option value="debt-managers">Debt Managers</option>
-                <option value="non-profit-workers">Non-Profit Workers & Volunteers</option>
-                <option value="tech-savvy-planners">Tech-Savvy Financial Planners</option>
-              </select>
-            </div>
-
+            
             {/* Terms and Conditions */}
             <div className="flex items-center">
               <input
