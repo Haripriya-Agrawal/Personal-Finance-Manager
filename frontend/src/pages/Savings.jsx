@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import PieChart from "../components/PieChart";
+import SavingsList from "../components/savingsList";
+import SavingsForm from "../components/savingsForm";
+import Milestone from "../components/savingsMilestone";
 import { Plus } from "lucide-react";
-
+import axios from "axios";
 
 const Savings = () => {
+
   return (
     <div className="bg-greenDeep min-h-screen p-4 sm:p-8 md:p-12 text-white font-sans">
       <Navbar />
@@ -14,56 +18,7 @@ const Savings = () => {
         <div className="flex flex-col gap-4 sm:gap-6 lg:w-1/3">
           
           {/* Add Savings Goal Section */}
-          <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg">
-            <h2 className="text-base text-text sm:text-lg font-bold mb-2 sm:mb-4">Add Savings Goal</h2>
-            <form className="space-y-2 sm:space-y-3">
-
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="text"
-                  placeholder="Goal amount"
-                  className="w-full p-2 rounded-lg bg-greenLight placeholder-gray-400"
-                />
-                <input
-                  type="text"
-                  placeholder="Description"
-                  className="w-full p-2 rounded-lg bg-greenLight placeholder-gray-400"
-                />
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="date"
-                  className="w-full p-2 rounded-lg bg-greenLight placeholder-gray-400"
-                />
-                <input
-                  type="date"
-                  className="w-full p-2 rounded-lg bg-greenLight placeholder-gray-400"
-                />
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="text"
-                  placeholder="Amount saved"
-                  className="w-full p-2 rounded-lg bg-greenLight placeholder-gray-400"
-                />
-                {/* <input
-                  type="text"
-                  placeholder="Frequency"
-                  className="w-full p-2 rounded-lg bg-greenLight placeholder-gray-400"
-                /> */}
-              </div>
-
-              <button
-                type="submit"
-                className="flex justify-center items-center w-full sm:w-1/2 p-2 bg-greenLight hover:bg-text rounded-lg font-semibold"
-              >
-                Add
-              </button>
-            </form>
-          </div>
-
+          <SavingsForm />
 
           {/* Current Saving Goals */}
           <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg">
@@ -79,35 +34,7 @@ const Savings = () => {
                 Completed
               </button>
             </div>
-            <ul className="space-y-2">
-              <li className="flex justify-between">
-                <span>Beach Trip</span>
-                <span>50%</span>
-                <button className="p-2 bg-none"> Add Funds </button>
-              </li>
-              <li className="flex justify-between">
-                <span>Emergency</span>
-                <span>25%</span>
-                <button className="p-2 bg-none"> Add Funds </button>
-                
-              </li>
-              <li className="flex justify-between">
-                <span>Car</span>
-                <span>70%</span>
-                <button className="p-2 bg-none"> Add Funds </button>
-              </li>
-              <li className="flex justify-between">
-                <span>Coach Bag</span>
-                <span>20%</span>
-                <button className="p-2 bg-none"> Add Funds </button>
-              </li>
-              <li className="flex justify-between">
-                <span>Home</span>
-                <span>30%</span>
-                <button className="p-2 bg-none"> Add Funds </button>
-                
-              </li>
-            </ul>
+            <SavingsList />
           </div> 
         </div>
         
@@ -126,15 +53,7 @@ const Savings = () => {
 
             {/* Milestone */}
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg w-full sm:w-2/3">
-              <h2 className="text-base text-text text-text sm:text-lg font-bold">Milestone</h2>
-              <p className="mt-2">50% of Car Savings Done !!</p>
-              <div className="w-full bg-greenLight h-4 rounded-full mt-4">
-                <div
-                  className="bg-text h-4 rounded-full"
-                  style={{ width: "50%" }}
-                ></div>
-              </div>
-              <p className="text-sm mt-2">₹ 5000 / ₹ 10000</p>
+              <Milestone />
             </div>
 
             {/* Savings Fact */}

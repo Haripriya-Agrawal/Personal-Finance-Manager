@@ -1,7 +1,6 @@
-const express = require("express");
-const { Budget, validateBudget } = require("../models/budget");
-
-const router = express.Router();
+import express from "express";
+import { Budget, validateBudget } from "../models/budget.js";
+const router = express.Router(); 
 
 // Add Budget
 router.post("/", async (req, res) => {
@@ -19,4 +18,4 @@ router.get("/:userId", async (req, res) => {
 	res.send(budgets);
 });
 
-module.exports = router;
+export default router;

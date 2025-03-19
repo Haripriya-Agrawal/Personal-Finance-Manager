@@ -1,30 +1,28 @@
-const mongoose = require("mongoose");
-const Joi = require("joi");
+import mongoose from "mongoose";
+import Joi from "joi";
 
 
-
-// not required
-
-
-
-
-const analyticsSchema = new mongoose.Schema({
-	userId: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
-	totalExpenses: { type: Number, default: 0 },
-	largestExpense: {
-		amount: { type: Number, default: 0 },
-		category: { type: String },
-		date: { type: Date }
+const analyticsSchema = new mongoose.Schema(
+	{
+		userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, 
+		totalExpenses: { type: Number, default: 0 },
+		largestExpense: {
+			amount: { type: Number, default: 0 },
+			category: { type: String },
+			date: { type: Date }
+		},
+		budgetGoalsMet: { type: Number, default: 0 },
+		dailySpendingTrends: {
+			type: [{ date: Date, amount: Number }],
+			default: []
+		},
+		spendingHeatmap: { type: Map, of: Number, default: {} },
+		categoryWiseSpending: { type: Map, of: Number, default: {} },
 	},
-	budgetGoalsMet: { type: Number, default: 0 },
-	dailySpendingTrends: [
-		{ date: { type: Date }, amount: { type: Number } }
-	],
-	spendingHeatmap: { type: Map, of: Number },
-	categoryWiseSpending: { type: Map, of: Number },
-}, { timestamps: true });
+	{ timestamps: true }
+);
 
-const Analytics = mongoose.model("analytics", analyticsSchema);
+const Analytics = mongoose.model("Analytics", analyticsSchema);
 
 const validateAnalytics = (data) => {
 	const schema = Joi.object({
@@ -45,4 +43,4 @@ const validateAnalytics = (data) => {
 	return schema.validate(data);
 };
 
-module.exports = { Analytics, validateAnalytics };
+export { Analytics, validateAnalytics };

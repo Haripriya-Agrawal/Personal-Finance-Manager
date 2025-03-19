@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
-const Joi = require("joi");
+import mongoose from "mongoose";
+import Joi from "joi";
 
 // budget to spend on a category
 const budgetSchema = new mongoose.Schema({
-	userId: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
+	userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 	category: { type: String, required: true },
 	targetAmount: { type: Number, required: true },
 	spentAmount: { type: Number, default: 0 },
@@ -11,7 +11,7 @@ const budgetSchema = new mongoose.Schema({
 	endDate: { type: Date, required: true }
 }, { timestamps: true });
 
-const Budget = mongoose.model("budget", budgetSchema);
+const Budget = mongoose.model("Budget", budgetSchema);
 
 const validateBudget = (data) => {
 	const schema = Joi.object({
@@ -25,4 +25,4 @@ const validateBudget = (data) => {
 	return schema.validate(data);
 };
 
-module.exports = { Budget, validateBudget };
+export { Budget, validateBudget };

@@ -1,6 +1,8 @@
-const router = require("express").Router();
-const { User, validate } = require("../models/user");
-const bcrypt = require("bcrypt");
+import { User, validate } from "../models/user.js";
+import bcrypt from "bcrypt";
+import { protect } from "../middleware/auth.js";
+import express from "express";
+const router = express.Router(); 
 
 router.post("/", async (req, res) => {
 	try {
@@ -23,4 +25,17 @@ router.post("/", async (req, res) => {
 	}
 });
 
-module.exports = router;
+// 🔹 Protected Route - Fetch User Details
+router.get("/profile", protect, async (req, res) => {
+	try {
+		const user = await User.findById(req.user.id).select("-password");
+		if (!user) return res.status(404).send({ message: "User not found" });
+
+		res.status(200).json(user);
+	} catch (error) {
+		console.error("Error fetching user profile:", error);
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+});
+
+export default router;

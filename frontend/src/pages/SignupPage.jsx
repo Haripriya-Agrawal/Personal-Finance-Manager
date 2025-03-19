@@ -1,7 +1,40 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignupPage() {
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    termsAccepted: false,
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const { termsAccepted, ...submitData } = data;
+  
+    try {
+      const url = "http://localhost:5000/api/user";
+      const { data: res } = await axios.post(url, submitData);
+      console.log(res.message);
+      navigate("/"); 
+    } catch (error) {
+      if (error.response && error.response.status >= 400) {
+        setError(error.response.data.message);
+      }
+    }
+  };
+  
+
   return (
     <div className="flex min-h-screen w-screen items-center justify-center bg-gray-900 text-gray-200">
       <div className="w-full max-w-4xl bg-gray-800 rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 overflow-hidden">
@@ -21,17 +54,25 @@ function SignupPage() {
               Log in
             </Link>
           </p>
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name Inputs */}
             <div className="flex gap-4">
               <input
                 type="text"
+                name="firstName" 
                 placeholder="First name"
+                value={data.firstName}
+                onChange={handleChange}
+                required
                 className="w-full px-4 py-2 bg-gray-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
               <input
                 type="text"
+                name="lastName"
                 placeholder="Last name"
+                value={data.lastName}
+                onChange={handleChange}
+                required
                 className="w-full px-4 py-2 bg-gray-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
@@ -39,12 +80,20 @@ function SignupPage() {
             {/* Email and Password */}
             <input
               type="email"
+              name="email" 
               placeholder="Email"
+              value={data.email}
+              onChange={handleChange}
+              required
               className="w-full px-4 py-2 bg-gray-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
             <input
               type="password"
+              name="password" 
               placeholder="Password"
+              value={data.password}
+              onChange={handleChange}
+              required
               className="w-full px-4 py-2 bg-gray-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
 
@@ -68,7 +117,11 @@ function SignupPage() {
             <div className="flex items-center">
               <input
                 type="checkbox"
+                name="termsAccepted"
+                checked={data.termsAccepted}
+                onChange={(e) => setData({ ...data, termsAccepted: e.target.checked })}
                 id="terms"
+                required
                 className="mr-2 h-4 w-4 text-text bg-gray-700 rounded border-gray-600 focus:ring-2 focus:ring-purple-500"
               />
               <label htmlFor="terms" className="text-gray-400">
@@ -78,6 +131,7 @@ function SignupPage() {
                 </Link>
               </label>
             </div>
+            {error && <p className="text-red-500 text-center">{error}</p>}
 
             {/* Submit Button */}
             <button

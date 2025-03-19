@@ -1,14 +1,14 @@
-const mongoose = require("mongoose");
-const Joi = require("joi");
+import mongoose from "mongoose";
+import Joi from "joi";
 
 const transactionSchema = new mongoose.Schema({
-	userId: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
+	userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, 
 	amount: { type: Number, required: true },
 	category: { type: String, required: true },
-	date: { type: Date, default: Date.now },
+	date: { type: Date, default: () => new Date() }, 
 }, { timestamps: true });
 
-const Transaction = mongoose.model("transaction", transactionSchema);
+const Transaction = mongoose.model("Transaction", transactionSchema);
 
 const validateTransaction = (data) => {
 	const schema = Joi.object({
@@ -20,4 +20,5 @@ const validateTransaction = (data) => {
 	return schema.validate(data);
 };
 
-module.exports = { Transaction, validateTransaction };
+// Export in ES module format
+export { Transaction, validateTransaction };

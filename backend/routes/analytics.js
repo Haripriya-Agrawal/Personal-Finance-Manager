@@ -1,7 +1,6 @@
-const express = require("express");
-const { Transaction } = require("../models/transaction");
-
-const router = express.Router();
+import express from "express";
+import { Transaction, validateTransaction } from "../models/transaction.js";
+const router = express.Router(); 
 
 // Get Analytics Data
 router.get("/:userId", async (req, res) => {
@@ -14,4 +13,4 @@ router.get("/:userId", async (req, res) => {
 	res.send({ totalExpenses, totalIncome, largestExpense });
 });
 
-module.exports = router;
+export default router;

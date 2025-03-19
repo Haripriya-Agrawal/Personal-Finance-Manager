@@ -1,7 +1,6 @@
-const express = require("express");
-const { Transaction, validateTransaction } = require("../models/transaction");
-
-const router = express.Router();
+import express from "express";
+import { Transaction, validateTransaction } from "../models/transaction.js";
+const router = express.Router(); 
 
 // Add Transaction
 router.post("/", async (req, res) => {
@@ -19,4 +18,4 @@ router.get("/:userId", async (req, res) => {
 	res.send(transactions);
 });
 
-module.exports = router;
+export default router;
