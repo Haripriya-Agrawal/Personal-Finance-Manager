@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import BarChart from "../components/BarChart";
 import LineChart from "../components/LineChart";
 import PieChart from "../components/PieChart";
+import TransactionsList from "../components/TransactionList"
 
 const Analytics = () => {
   return (
@@ -34,7 +35,7 @@ const Analytics = () => {
           <h1 className="text-xl font-semibold text-text p-4">Transactions</h1>
           <div className="bg-gradient-to-b from-greenMedium to-greenLight p-6 rounded-2xl h-auto w-full">
             <div className="space-y-4">
-              <div className="flex justify-between items-center">
+              {/* <div className="flex justify-between items-center">
                 <p>Haripriya Agrawal</p>
                 <p>₹ 10,000</p>
               </div>
@@ -49,7 +50,8 @@ const Analytics = () => {
               <div className="flex justify-between items-center">
                 <p>Samiksha Jadhav</p>
                 <p>₹ 250</p>
-              </div>
+              </div> */}
+              <TransactionsList/>
             </div>
           </div>
         </div>

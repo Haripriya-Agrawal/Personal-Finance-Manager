@@ -2,8 +2,15 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import PieChart from "../components/PieChart";
 import BarChart from "../components/BarChart";
+import TransactionsList from "../components/TransactionList"
+import TotalSavings from "../components/SavingsComponents/TotalSavings"
 
 const Dashboard = () => {
+  const { totalSaved, totalTarget, loading } = useSavings();
+
+  if (loading) return <p>Loading savings data...</p>;
+
+  const progress = totalTarget > 0 ? (totalSaved / totalTarget) * 100 : 0;
   return (
     <div className="bg-greenDeep text-text min-h-screen p-6 lg:p-12">
       <Navbar />
@@ -23,16 +30,19 @@ const Dashboard = () => {
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
               <h2 className="text-lg font-semibold">Current Savings</h2>
-              <p className="text-3xl font-bold mt-2">₹ 30000</p>
+              <p className="text-3xl font-bold mt-2"><TotalSavings/></p>
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
               <h2 className="text-lg font-semibold">Saving Goals</h2>
               <div className="mt-2 bg-green-500 h-4 rounded-full overflow-hidden">
-                <div className="bg-green-200 h-full w-1/2"></div>
+                <div
+                  className="bg-green-200 h-full transition-all duration-500"
+                  style={{ width: `${progress}%` }} // Dynamic width based on savings progress
+                ></div>
               </div>
               <div className="flex justify-between mt-2 text-sm">
-                <span>₹ 5000</span>
-                <span>₹ 10000</span>
+                <span>₹ {totalSaved.toFixed(2)}</span>
+                <span>₹ {totalTarget.toFixed(2)}</span>
               </div>
             </div>
           </div>
@@ -46,7 +56,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
-              <h2 className="text-lg font-semibold">Income vs Expense</h2>
+              <h2 className="text-lg font-semibold">Saving vs Expense</h2>
               <div className="mt-4 bg-text bg-opacity-10 rounded-2xl h-[350px] flex items-center justify-center">
                 <BarChart />
               </div>
@@ -59,22 +69,7 @@ const Dashboard = () => {
           <div className=" p-6 rounded-b-2xl h-2/3">
             <h2 className="text-lg font-semibold">Transactions</h2>
             <div className="mt-4 space-y-4">
-              <div className="flex justify-between items-center">
-                <p>Haripriya Agrawal</p>
-                <p>₹ 10000</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>Netflix</p>
-                <p>₹ 499</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>Devendra Ingale</p>
-                <p>₹ 25</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>Samiksha Jadhav</p>
-                <p>₹ 250</p>
-              </div>
+              <TransactionsList/>
             </div>
           </div>
 

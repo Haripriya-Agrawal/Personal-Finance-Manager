@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import PieChart from "../components/PieChart";
-import SavingsList from "../components/savingsList";
-import SavingsForm from "../components/savingsForm";
-import Milestone from "../components/savingsMilestone";
-import { Plus } from "lucide-react";
-import axios from "axios";
+import SavingsPieChart from "../components/SavingsComponents/SavingsPieChart";
+import SavingsList from "../components/SavingsComponents/savingsList";
+import SavingsForm from "../components/SavingsComponents/savingsForm";
+import Milestone from "../components/SavingsComponents/savingsMilestone";
+import { fetchSavings } from "../services/addSavings";
 
 const Savings = () => {
+  const [savings, setSavings] = useState([]);
+  const [editingGoal, setEditingGoal] = useState(null);
+
+  const loadSavings = async () => {
+    try {
+      const data = await fetchSavings();
+      setSavings(data);
+    } catch (error) {
+      console.error("Failed to load savings:", error);
+    }
+  };
+
+  useEffect(() => {
+    loadSavings();
+  }, []);
 
   return (
     <div className="bg-greenDeep min-h-screen p-4 sm:p-8 md:p-12 text-white font-sans">
@@ -18,23 +32,12 @@ const Savings = () => {
         <div className="flex flex-col gap-4 sm:gap-6 lg:w-1/3">
           
           {/* Add Savings Goal Section */}
-          <SavingsForm />
+          <SavingsForm onGoalAdded={loadSavings} editingGoal={editingGoal} setEditingGoal={setEditingGoal} />
 
           {/* Current Saving Goals */}
           <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg">
             <h2 className="text-base text-text text-text sm:text-lg font-bold mb-2 sm:mb-4">Current Saving Goals</h2>
-            <div className="flex flex-wrap gap-2 mb-4">
-              <button className="p-2 bg-greenLight rounded-lg font-semibold">
-                Ongoing
-              </button>
-              <button className="p-2 bg-greenLight rounded-lg font-semibold">
-                Upcoming
-              </button>
-              <button className="p-2 bg-greenLight rounded-lg font-semibold">
-                Completed
-              </button>
-            </div>
-            <SavingsList />
+            <SavingsList savings={savings} setEditingGoal={setEditingGoal} />
           </div> 
         </div>
         
@@ -71,7 +74,7 @@ const Savings = () => {
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg w-full sm:w-1/2">
               <h2 className="text-base text-text text-text sm:text-lg font-bold mb-2 sm:mb-4">Total Savings Pie Chart</h2>
               <div className=" bg-greenLight bg-opacity-20 rounded-lg">
-                <PieChart className="h-full w-full" />
+                <SavingsPieChart className="h-full w-full" />
               </div>
             </div>
 

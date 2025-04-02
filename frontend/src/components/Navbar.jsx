@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Bell, User, X, Menu } from "lucide-react";
+import Profile from "./profile";
 
 const Navbar = () => {
   const [isNotificationsOpen, setNotificationsOpen] = useState(false);
@@ -86,31 +87,9 @@ const Navbar = () => {
       </div>
 
       {/* Profile Panel */}
-      <div
-        className={`fixed top-0 right-0 w-80 h-full bg-greenDeep shadow-lg p-4 transition-transform ${
-          isProfileOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex justify-between items-center border-b pb-2">
-          <h2 className="text-lg font-semibold">Profile</h2>
-          <X
-            className="w-6 h-6 cursor-pointer"
-            onClick={() => setProfileOpen(false)}
-          />
-        </div>
-        <div className="mt-4 text-center">
-          <p className="font-semibold text-lg">👤 Haripriya</p>
-          <p className="text-sm text-gray-500">priyagr0104@gmail.com</p>
-        </div>
-        <div className="mt-6 space-y-2">
-          <button className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600">
-            My Profile
-          </button>
-          <button className="w-full py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600">
-            Logout
-          </button>
-        </div>
-      </div>
+      <div>
+      <Profile isProfileOpen={isProfileOpen} setProfileOpen={setProfileOpen} />
+    </div>
     </>
   );
 };

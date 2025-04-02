@@ -42,4 +42,38 @@ router.get("/", protect, async (req, res) => {
     }
 });
 
+router.put("/:id", protect, async (req, res) => {
+    try {
+        const { error } = validateSavings(req.body);
+        if (error) {
+            console.error("Validation Error:", error.details[0].message);
+            return res.status(400).json({ message: error.details[0].message });
+        }
+
+        const savings = await Savings.findOneAndUpdate(
+            { _id: req.params.id, userId: req.user._id },
+            {
+                goalName: req.body.goalName,
+                targetAmount: req.body.targetAmount,
+                savedAmount: req.body.savedAmount,
+                startDate: req.body.startDate,
+                endDate: req.body.endDate,
+                status: req.body.status,
+            },
+            { new: true, runValidators: true }
+        );
+
+        if (!savings) {
+            console.error("Savings Goal Not Found for ID:", req.params.id);
+            return res.status(404).json({ message: "Savings goal not found" });
+        }
+
+        res.json({ message: "Savings goal updated successfully", savings });
+    } catch (error) {
+        console.error("Error updating savings goal:", error);
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
+});
+
+
 export default router;
