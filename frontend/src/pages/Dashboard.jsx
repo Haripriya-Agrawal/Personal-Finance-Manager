@@ -3,14 +3,9 @@ import Navbar from "../components/Navbar";
 import PieChart from "../components/PieChart";
 import BarChart from "../components/BarChart";
 import TransactionsList from "../components/TransactionList"
-import TotalSavings from "../components/SavingsComponents/TotalSavings"
+import SavingsOverview from "../components/SavingsComponents/savingsLine"
 
 const Dashboard = () => {
-  const { totalSaved, totalTarget, loading } = useSavings();
-
-  if (loading) return <p>Loading savings data...</p>;
-
-  const progress = totalTarget > 0 ? (totalSaved / totalTarget) * 100 : 0;
   return (
     <div className="bg-greenDeep text-text min-h-screen p-6 lg:p-12">
       <Navbar />
@@ -30,21 +25,19 @@ const Dashboard = () => {
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
               <h2 className="text-lg font-semibold">Current Savings</h2>
-              <p className="text-3xl font-bold mt-2"><TotalSavings/></p>
+              <p className="text-3xl font-bold mt-2">₹ 30000</p>
             </div>
-            <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
+            {/* <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
               <h2 className="text-lg font-semibold">Saving Goals</h2>
               <div className="mt-2 bg-green-500 h-4 rounded-full overflow-hidden">
-                <div
-                  className="bg-green-200 h-full transition-all duration-500"
-                  style={{ width: `${progress}%` }} // Dynamic width based on savings progress
-                ></div>
+                <div className="bg-green-200 h-full w-1/2"></div>
               </div>
               <div className="flex justify-between mt-2 text-sm">
-                <span>₹ {totalSaved.toFixed(2)}</span>
-                <span>₹ {totalTarget.toFixed(2)}</span>
+                <span>₹ 5000</span>
+                <span>₹ 10000</span>
               </div>
-            </div>
+            </div> */}
+            <SavingsOverview/>
           </div>
 
           {/* Charts Section */}
@@ -56,7 +49,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
-              <h2 className="text-lg font-semibold">Saving vs Expense</h2>
+              <h2 className="text-lg font-semibold">Income vs Expense</h2>
               <div className="mt-4 bg-text bg-opacity-10 rounded-2xl h-[350px] flex items-center justify-center">
                 <BarChart />
               </div>
@@ -67,10 +60,7 @@ const Dashboard = () => {
         {/* Sidebar */}
         <div className="flex flex-col-reverse lg:w-[348px] gap-6 rounded-xl bg-greenMedium bg-opacity-30">
           <div className=" p-6 rounded-b-2xl h-2/3">
-            <h2 className="text-lg font-semibold">Transactions</h2>
-            <div className="mt-4 space-y-4">
-              <TransactionsList/>
-            </div>
+            <TransactionsList/>
           </div>
 
           <div className=" p-6 rounded-t-2xl h-1/3">
