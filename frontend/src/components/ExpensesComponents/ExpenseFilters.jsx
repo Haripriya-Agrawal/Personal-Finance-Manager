@@ -18,7 +18,9 @@ const ExpenseFilters = ({ search, setSearch, filters, setFilters }) => {
             <option value="">Filter by Category</option>
             <option value="Food">Food</option>
             <option value="Transportation">Transportation</option>
+            <option value="Lifestyle">Lifestyle</option>
             <option value="Entertainment">Entertainment</option>
+            <option value="Health">Health</option>
             <option value="Other">Other</option>
           </select>
           <input

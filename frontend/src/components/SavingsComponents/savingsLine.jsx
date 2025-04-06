@@ -12,7 +12,6 @@ const SavingsOverview = () => {
         const response = await axios.get("/api/savings");
         setSavings(response.data);
 
-        // Calculate totals
         const saved = response.data.reduce((acc, goal) => acc + goal.savedAmount, 0);
         const target = response.data.reduce((acc, goal) => acc + goal.targetAmount, 0);
         
