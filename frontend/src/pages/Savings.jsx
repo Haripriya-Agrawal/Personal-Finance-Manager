@@ -5,6 +5,8 @@ import SavingsList from "../components/SavingsComponents/savingsList";
 import SavingsForm from "../components/SavingsComponents/savingsForm";
 import Milestone from "../components/SavingsComponents/savingsMilestone";
 import { fetchSavings } from "../services/addSavings";
+import SavingsOverview from "../components/SavingsComponents/savingsLine"
+import TotalSavings from "../components/SavingsComponents/TotalSavings";
 
 const Savings = () => {
   const [savings, setSavings] = useState([]);
@@ -51,7 +53,7 @@ const Savings = () => {
             {/* Available Funds */}
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg flex flex-col justify-center items-center w-full sm:w-1/3">
               <h2 className="text-base text-text text-text sm:text-lg font-bold">Available funds</h2>
-              <p className="text-xl sm:text-3xl font-bold mt-2 sm:mt-4">₹ 30,000</p>
+              <p className="text-xl sm:text-3xl font-bold mt-2 sm:mt-4"><TotalSavings/></p>
             </div>
 
             {/* Milestone */}
@@ -72,18 +74,17 @@ const Savings = () => {
 
             {/* Pie Chart */}
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg w-full sm:w-1/2">
-              <h2 className="text-base text-text text-text sm:text-lg font-bold mb-2 sm:mb-4">Total Savings Pie Chart</h2>
+              <h2 className="text-base text-text text-text sm:text-lg font-bold mb-2 sm:mb-4">Total Savings Chart</h2>
               <div className=" bg-greenLight bg-opacity-20 rounded-lg">
                 <SavingsPieChart className="h-full w-full" />
+                
               </div>
             </div>
 
             {/* Line Chart */}
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg w-full sm:w-1/2">
               <h2 className="text-base text-text text-text sm:text-lg font-bold mb-2 sm:mb-4">Line Chart</h2>
-              <div className="h-40 bg-greenLight rounded-lg flex justify-center items-center">
-                <p>Line Chart Placeholder</p>
-              </div>
+              <SavingsOverview/>
             </div>
           </div>
         </div>

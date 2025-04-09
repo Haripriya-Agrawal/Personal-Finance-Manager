@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { fetchSavings } from "../../services/addSavings.js"; 
 
 const SavingsOverview = () => {
-  const [savings, setSavings] = useState([]);
   const [totalSaved, setTotalSaved] = useState(0);
   const [totalTarget, setTotalTarget] = useState(0);
 
   useEffect(() => {
-    const fetchSavings = async () => {
+    const loadSavings = async () => {
       try {
-        const response = await axios.get("/api/savings");
-        setSavings(response.data);
+        const savings = await fetchSavings();
 
-        const saved = response.data.reduce((acc, goal) => acc + goal.savedAmount, 0);
-        const target = response.data.reduce((acc, goal) => acc + goal.targetAmount, 0);
-        
+        const saved = savings.reduce((acc, goal) => acc + (goal.savedAmount || 0), 0);
+        const target = savings.reduce((acc, goal) => acc + (goal.targetAmount || 0), 0);
+
         setTotalSaved(saved);
         setTotalTarget(target);
       } catch (error) {
-        console.error("Error fetching savings:", error);
+        console.error("Failed to load savings data:", error);
       }
     };
 
-    fetchSavings();
+    loadSavings();
   }, []);
 
   const progress = totalTarget > 0 ? (totalSaved / totalTarget) * 100 : 0;
@@ -32,13 +30,13 @@ const SavingsOverview = () => {
       <h2 className="text-lg font-semibold">Total Savings Progress</h2>
       <div className="mt-2 bg-green-500 h-4 rounded-full overflow-hidden">
         <div
-          className="bg-green-200 h-full"
-          style={{ width: `${progress}%` }}
+          className="bg-green-200 h-full transition-all duration-500"
+          style={{ width: `${Math.min(progress, 100)}%` }}
         ></div>
       </div>
       <div className="flex justify-between mt-2 text-sm">
-        <span>₹ {totalSaved}</span>
-        <span>₹ {totalTarget}</span>
+        <span>Saved: ₹ {totalSaved.toLocaleString()}</span>
+        <span>Goal: ₹ {totalTarget.toLocaleString()}</span>
       </div>
     </div>
   );

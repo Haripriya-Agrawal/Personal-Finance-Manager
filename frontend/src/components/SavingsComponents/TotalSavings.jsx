@@ -37,7 +37,7 @@ const TotalSavings = () => {
 
   return (
     <div>
-      <p>₹{totalSaved.toFixed(2)}</p>
+      <p className="text-3xl font-bold mt-2">₹{totalSaved.toFixed(2)}</p>
     </div>
   );
 };

@@ -54,7 +54,7 @@ const BudgetsPage=()=>{
 
       const data = await response.json();
       if (response.ok) {
-        alert("Budget added successfully!");
+        // alert("Budget added successfully!");
         setFormData({ targetAmount: "", category: "", startDate: "", endDate: "" });
         fetchBudgets();
       } else {
@@ -85,7 +85,7 @@ const BudgetsPage=()=>{
 
       const data = await response.json();
       if (response.ok) {
-        alert("Budget updated successfully!");
+        // alert("Budget updated successfully!");
         setBudgetId(null);
         setFormData({ targetAmount: "", category: "", startDate: "", endDate: "" });
         fetchBudgets();

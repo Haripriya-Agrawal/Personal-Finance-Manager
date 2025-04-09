@@ -4,6 +4,8 @@ import PieChart from "../components/PieChart";
 import BarChart from "../components/BarChart";
 import TransactionsList from "../components/TransactionList"
 import SavingsOverview from "../components/SavingsComponents/savingsLine"
+import TotalSavings from "../components/SavingsComponents/TotalSavings";
+import RemainingBudget from "../components/RemainingBudget";
 
 const Dashboard = () => {
   return (
@@ -21,22 +23,12 @@ const Dashboard = () => {
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
               <h2 className="text-lg font-semibold">Remaining Budget</h2>
-              <p className="text-3xl font-bold mt-2">₹ 30000</p>
+              <p className="text-3xl font-bold mt-3">₹ <RemainingBudget/></p>
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
               <h2 className="text-lg font-semibold">Current Savings</h2>
-              <p className="text-3xl font-bold mt-2">₹ 30000</p>
+              <TotalSavings/>
             </div>
-            {/* <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
-              <h2 className="text-lg font-semibold">Saving Goals</h2>
-              <div className="mt-2 bg-green-500 h-4 rounded-full overflow-hidden">
-                <div className="bg-green-200 h-full w-1/2"></div>
-              </div>
-              <div className="flex justify-between mt-2 text-sm">
-                <span>₹ 5000</span>
-                <span>₹ 10000</span>
-              </div>
-            </div> */}
             <SavingsOverview/>
           </div>
 
