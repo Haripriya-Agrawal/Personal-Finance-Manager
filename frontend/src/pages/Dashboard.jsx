@@ -41,7 +41,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
-              <h2 className="text-lg font-semibold">Income vs Expense</h2>
+              <h2 className="text-lg font-semibold">Saving vs Expense</h2>
               <div className="mt-4 bg-text bg-opacity-10 rounded-2xl h-[350px] flex items-center justify-center">
                 <BarChart />
               </div>

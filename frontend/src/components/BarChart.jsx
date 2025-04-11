@@ -21,10 +21,10 @@ const BarChart = () => {
     "September", "October", "November", "December"
   ];
 
-  const aggregateByMonth = (data, key) => {
+  const aggregateByMonth = (data, key, dateKey) => {
     const monthlyTotals = Array(12).fill(0);
     data.forEach((item) => {
-      const rawDate = item.date || item.startDate;
+      const rawDate = item[dateKey];
       if (!rawDate || isNaN(new Date(rawDate))) return;
 
       const monthIndex = new Date(rawDate).getMonth();
@@ -40,11 +40,11 @@ const BarChart = () => {
     const loadData = async () => {
       try {
         const { savings, expenses } = await fetchChartData(token);
-        console.log("Raw savings data:", savings);
-        console.log("Raw expenses data:", expenses);
+        console.log("Fetched savings:", savings);
+        console.log("Fetched expenses:", expenses);
 
-        const savingsData = aggregateByMonth(savings, "savedAmount");
-        const expenseData = aggregateByMonth(expenses, "amount");
+        const savingsData = aggregateByMonth(savings, "savedAmount", "startDate");
+        const expenseData = aggregateByMonth(expenses, "amount", "date");
 
         console.log("Monthly savings:", savingsData);
         console.log("Monthly expenses:", expenseData);
@@ -53,14 +53,14 @@ const BarChart = () => {
           labels: months,
           datasets: [
             {
-              label: "Saving",
+              label: "Savings",
               data: savingsData,
               backgroundColor: "#40A798",
               borderColor: "#388E3C",
               borderWidth: 1,
             },
             {
-              label: "Expense",
+              label: "Expenses",
               data: expenseData,
               backgroundColor: "#DF3554",
               borderColor: "#D32F2F",

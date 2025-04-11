@@ -57,7 +57,7 @@ const RemainingBudget = () => {
 
   return (
       <p className="text-3xl font-bold text-white-700">
-        ${remaining.toFixed(1)}
+        {remaining.toFixed(1)}
       </p>
   );
 };
