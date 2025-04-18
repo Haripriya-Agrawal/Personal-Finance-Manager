@@ -68,6 +68,6 @@ export const fetchSavings = async () => {
     return res.data;
   } catch (error) {
     console.error("Error fetching savings:", error);
-    return []; // Return an empty array to prevent frontend crashes
+    return []; 
   }
 };

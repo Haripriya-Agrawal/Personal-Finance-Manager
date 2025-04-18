@@ -16,9 +16,9 @@ const BarChart = () => {
   const [chartData, setChartData] = useState(null);
 
   const months = [
-    "January", "February", "March", "April",
-    "May", "June", "July", "August",
-    "September", "October", "November", "December"
+    "Jan", "Feb", "Mar", "Apr",
+    "May", "June", "July", "Aug",
+    "Sept", "Oct", "Nov", "Dec"
   ];
 
   const aggregateByMonth = (data, key, dateKey) => {
@@ -40,14 +40,20 @@ const BarChart = () => {
     const loadData = async () => {
       try {
         const { savings, expenses } = await fetchChartData(token);
-        console.log("Fetched savings:", savings);
-        console.log("Fetched expenses:", expenses);
+
+        console.log("✅ Raw savings from API:", savings);
+        console.log("✅ Raw expenses from API:", expenses);
+
+        if (!Array.isArray(savings) || !Array.isArray(expenses)) {
+          console.error("❌ API did not return arrays. Please check the backend response shape.");
+          return;
+        }
 
         const savingsData = aggregateByMonth(savings, "savedAmount", "startDate");
         const expenseData = aggregateByMonth(expenses, "amount", "date");
 
-        console.log("Monthly savings:", savingsData);
-        console.log("Monthly expenses:", expenseData);
+        console.log("📊 Monthly savings:", savingsData);
+        console.log("📊 Monthly expenses:", expenseData);
 
         setChartData({
           labels: months,
@@ -69,7 +75,7 @@ const BarChart = () => {
           ],
         });
       } catch (error) {
-        console.error("Error fetching chart data:", error);
+        console.error("❌ Error fetching chart data:", error);
       }
     };
 

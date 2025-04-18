@@ -37,22 +37,6 @@ const Analytics = () => {
     fetchTransactions();
   }, [token]);
 
-  useEffect(() => {
-    const fetchAnalytics = async () => {
-      if (!token) return;
-      try {
-        const res = await axios.get(`http://localhost:5000/api/analytics/spending?type=${viewType}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setLineChartData(res.data);
-      } catch (error) {
-        console.error("Failed to fetch analytics data:", error);
-      }
-    };
-
-    fetchAnalytics();
-  }, [viewType, token]);
-
   return (
     <div className="bg-greenDeep text-text min-h-screen w-full overflow-x-hidden p-12">
       <Navbar />
@@ -101,7 +85,7 @@ const Analytics = () => {
                 <PieChart className="h-full w-full max-w-full max-h-full" />
               </div>
             </div>
-
+            {/* <SpendingTrends /> */}
             <div className="h-[430px] w-full lg:w-1/2 rounded-2xl bg-greenMedium bg-opacity-30 flex flex-col">
               <h1 className="text-xl font-semibold p-6">
                 {viewType.charAt(0).toUpperCase() + viewType.slice(1)} Spending Trends
