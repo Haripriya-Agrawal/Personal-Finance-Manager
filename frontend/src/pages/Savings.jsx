@@ -33,10 +33,8 @@ const Savings = () => {
 
         <div className="flex flex-col gap-4 sm:gap-6 lg:w-1/3">
           
-          {/* Add Savings Goal Section */}
           <SavingsForm onGoalAdded={loadSavings} editingGoal={editingGoal} setEditingGoal={setEditingGoal} />
 
-          {/* Current Saving Goals */}
           <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg">
             <h2 className="text-base text-text text-text sm:text-lg font-bold mb-2 sm:mb-4">Current Saving Goals</h2>
             <SavingsList savings={savings} setEditingGoal={setEditingGoal} />
@@ -44,24 +42,18 @@ const Savings = () => {
         </div>
         
 
-        {/* Column 2 */}
         <div className="flex flex-col gap-4 sm:gap-6 lg:w-2/3">
           
-          {/* Row 1 */}
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
 
-            {/* Available Funds */}
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg flex flex-col justify-center items-center w-full sm:w-1/3">
               <h2 className="text-base text-text text-text sm:text-lg font-bold">Available funds</h2>
               <p className="text-xl sm:text-3xl font-bold mt-2 sm:mt-4"><TotalSavings/></p>
             </div>
 
-            {/* Milestone */}
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg w-full sm:w-2/3">
               <Milestone />
             </div>
-
-            {/* Savings Fact */}
 
             <div className="flex flex-col p-6 bg-greenMedium bg-opacity-30 rounded-xl gap-6">
               <h2 className="font-bold ">Savings Fact of the day</h2>
@@ -69,10 +61,8 @@ const Savings = () => {
             </div>
           </div>
 
-          {/* Row 2 */}
           <div className="flex flex-col  flex-grow sm:flex-row gap-4 sm:gap-6">
 
-            {/* Pie Chart */}
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg w-full sm:w-1/2">
               <h2 className="text-base text-text text-text sm:text-lg font-bold mb-2 sm:mb-4">Total Savings Chart</h2>
               <div className=" bg-greenLight bg-opacity-20 rounded-lg">
@@ -81,7 +71,6 @@ const Savings = () => {
               </div>
             </div>
 
-            {/* Line Chart */}
             <div className="bg-greenMedium bg-opacity-30 p-4 rounded-2xl shadow-lg w-full sm:w-1/2">
               <h2 className="text-base text-text text-text sm:text-lg font-bold mb-2 sm:mb-4">Line Chart</h2>
               <SavingsOverview/>

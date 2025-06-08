@@ -42,8 +42,7 @@ const SavingsForm = ({ onGoalAdded, editingGoal, setEditingGoal  }) => {
         };
 
         const formattedData = {
-            ...restData,
-            userId: editingGoal?.userId || localStorage.getItem("userId"), // Ensure userId is included
+            ...restData
         };
 
         if (editingGoal?._id) {

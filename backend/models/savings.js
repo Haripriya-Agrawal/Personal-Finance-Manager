@@ -19,7 +19,7 @@ const Savings = mongoose.models.Savings || mongoose.model("Savings", savingsSche
 
 const validateSavings = (data) => {
 	const schema = Joi.object({
-		userId: Joi.string().required().label("User ID"),
+		// userId: Joi.string().required().label("User ID"),
 		goalName: Joi.string().required().label("Goal Name"),
 		targetAmount: Joi.number().positive().required().label("Target Amount"),
 		savedAmount: Joi.number().min(0).label("Saved Amount"),

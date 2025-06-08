@@ -1,22 +1,22 @@
 import axios from "axios";
 
 export const fetchChartData = async (token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  try {
+    const [savingsRes, expensesRes] = await Promise.all([
+      axios.get("http://localhost:5000/api/savings", {
+        headers: { Authorization: `Bearer ${token}` },
+      }),
+      axios.get("http://localhost:5000/api/transaction", {
+        headers: { Authorization: `Bearer ${token}` },
+      }),
+    ]);
 
-  const [savingsRes, expensesRes] = await Promise.all([
-    axios.get("http://localhost:5000/api/savings", config),
-    axios.get("http://localhost:5000/api/transaction", config),
-  ]);
-
-  console.log("👉 Savings Response:", savingsRes.data);
-  console.log("👉 Expenses Response:", expensesRes.data);
-
-  return {
-    savings: savingsRes.data,
-    expenses: expensesRes.data,
-  };
+    return {
+      savings: savingsRes.data,
+      expenses: expensesRes.data,
+    };
+  } catch (error) {
+    console.error("Error fetching chart data:", error);
+    return { savings: [], expenses: [] };
+  }
 };

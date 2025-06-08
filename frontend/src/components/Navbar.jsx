@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Bell, User, X, Menu } from "lucide-react";
 import Profile from "./profile";
-import Notifications from "./Notifications";
 
 const Navbar = () => {
   const [isNotificationsOpen, setNotificationsOpen] = useState(false);
@@ -80,12 +79,11 @@ const Navbar = () => {
             onClick={() => setNotificationsOpen(false)}
           />
         </div>
-        <Notifications/>
-        {/* <div className="mt-4 space-y-4">
+        <div className="mt-4 space-y-4">
           <p className="p-2 bg-greenMedium bg-opacity-30 rounded">🔔 New transaction added</p>
           <p className="p-2 bg-greenMedium bg-opacity-30 rounded">📈 Your analytics report is ready</p>
           <p className="p-2 bg-greenMedium bg-opacity-30 rounded">💰 You reached 80% of your savings goal!</p>
-        </div> */}
+        </div>
       </div>
 
       {/* Profile Panel */}

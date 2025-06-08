@@ -9,9 +9,12 @@ const SavingsList = ({ savings, setEditingGoal }) => {
     const completed = [];
 
     savings.forEach((saving) => {
-      const progress = saving.targetAmount === 0 ? 0 : (saving.savedAmount / saving.targetAmount) * 100;
+      const progress =
+        saving.targetAmount === 0
+          ? 0
+          : (saving.savedAmount / saving.targetAmount) * 100;
 
-      if (progress === 0) {
+      if (progress <= 0) {
         upcoming.push(saving);
       } else if (progress >= 100) {
         completed.push(saving);
@@ -27,9 +30,12 @@ const SavingsList = ({ savings, setEditingGoal }) => {
 
   const getFilteredSavings = () => {
     switch (activeFilter) {
-      case "Upcoming": return upcoming.slice(0, 6);
-      case "Completed": return completed.slice(0, 6);
-      default: return ongoing.slice(0, 6);
+      case "Upcoming":
+        return upcoming;
+      case "Completed":
+        return completed;
+      default:
+        return ongoing;
     }
   };
 
@@ -43,7 +49,9 @@ const SavingsList = ({ savings, setEditingGoal }) => {
             key={filter}
             onClick={() => setActiveFilter(filter)}
             className={`p-2 rounded-lg font-semibold ${
-              activeFilter === filter ? "bg-greenDark text-white" : "bg-greenLight"
+              activeFilter === filter
+                ? "bg-greenDark text-white"
+                : "bg-greenLight"
             }`}
           >
             {filter}
@@ -56,7 +64,10 @@ const SavingsList = ({ savings, setEditingGoal }) => {
           <p className="text-gray-300">No savings goals in this category.</p>
         ) : (
           filteredSavings.map((saving) => {
-            const progress = saving.targetAmount === 0 ? 0 : (saving.savedAmount / saving.targetAmount) * 100;
+            const progress =
+              saving.targetAmount === 0
+                ? 0
+                : (saving.savedAmount / saving.targetAmount) * 100;
 
             return (
               <li
@@ -87,3 +98,4 @@ const SavingsList = ({ savings, setEditingGoal }) => {
 };
 
 export default SavingsList;
+

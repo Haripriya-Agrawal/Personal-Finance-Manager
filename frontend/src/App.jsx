@@ -7,7 +7,6 @@ import Expenses from './pages/Expenses';
 import Analytics from './pages/Analytics';
 import Savings from './pages/Savings';
 import BudgetsPage from './pages/BudgetsPage';
-import MyProfile from './pages/myProfile';
 
 import './App.css';
 
@@ -32,8 +31,6 @@ function App() {
         <Route path="/savings" element={<Savings/>} />
 
         <Route path="/budgets" element={<BudgetsPage/>} />
-
-        <Route path="/myprofile" element={<MyProfile />} />
 
 
       </Routes>

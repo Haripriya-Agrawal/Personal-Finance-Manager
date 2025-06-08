@@ -60,7 +60,7 @@ const Profile = ({ isProfileOpen, setProfileOpen }) => {
       )}
 
       <div className="mt-6 space-y-2">
-        <button className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={() => navigate("/myprofile")}>
+        <button className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600">
           My Profile
         </button>
         <button onClick={handleLogout} className="w-full py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600">

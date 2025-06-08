@@ -8,12 +8,13 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { fetchChartData } from "../services/barChartData";
+import axios from "axios";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const BarChart = () => {
   const [chartData, setChartData] = useState(null);
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
   const months = [
     "Jan", "Feb", "Mar", "Apr",
@@ -21,97 +22,93 @@ const BarChart = () => {
     "Sept", "Oct", "Nov", "Dec"
   ];
 
-  const aggregateByMonth = (data, key, dateKey) => {
+  const aggregateByMonth = (items, type) => {
     const monthlyTotals = Array(12).fill(0);
-    data.forEach((item) => {
-      const rawDate = item[dateKey];
+
+    items.forEach((item) => {
+      const rawDate = type === "transaction" ? item.date : item.startDate;
+      const value = type === "transaction" ? item.amount : item.savedAmount;
+
       if (!rawDate || isNaN(new Date(rawDate))) return;
 
       const monthIndex = new Date(rawDate).getMonth();
-      const value = parseFloat(item[key]) || 0;
-      monthlyTotals[monthIndex] += value;
+
+      if (type === "transaction" && item.category !== "income") {
+        monthlyTotals[monthIndex] += parseFloat(value || 0);
+      }
+
+      if (type === "saving") {
+        monthlyTotals[monthIndex] += parseFloat(value || 0);
+      }
     });
+
     return monthlyTotals;
   };
 
-  useEffect(() => {
+  const fetchData = async () => {
     const token = localStorage.getItem("token");
 
-    const loadData = async () => {
-      try {
-        const { savings, expenses } = await fetchChartData(token);
+    try {
+      const [txRes, savingRes] = await Promise.all([
+        axios.get("http://localhost:5000/api/transaction", {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        axios.get("http://localhost:5000/api/savings", {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ]);
 
-        console.log("✅ Raw savings from API:", savings);
-        console.log("✅ Raw expenses from API:", expenses);
+      const expenses = aggregateByMonth(txRes.data, "transaction");
+      const savings = aggregateByMonth(savingRes.data, "saving");
 
-        if (!Array.isArray(savings) || !Array.isArray(expenses)) {
-          console.error("❌ API did not return arrays. Please check the backend response shape.");
-          return;
-        }
+      setChartData({
+        labels: months,
+        datasets: [
+          {
+            label: "Savings",
+            data: savings,
+            backgroundColor: "#40A798",
+            borderColor: "#388E3C",
+            borderWidth: 1,
+          },
+          {
+            label: "Expenses",
+            data: expenses,
+            backgroundColor: "#DF3554",
+            borderColor: "#D32F2F",
+            borderWidth: 1,
+          },
+        ],
+      });
+    } catch (error) {
+      console.error("Error fetching chart data:", error);
+    }
+  };
 
-        const savingsData = aggregateByMonth(savings, "savedAmount", "startDate");
-        const expenseData = aggregateByMonth(expenses, "amount", "date");
-
-        console.log("📊 Monthly savings:", savingsData);
-        console.log("📊 Monthly expenses:", expenseData);
-
-        setChartData({
-          labels: months,
-          datasets: [
-            {
-              label: "Savings",
-              data: savingsData,
-              backgroundColor: "#40A798",
-              borderColor: "#388E3C",
-              borderWidth: 1,
-            },
-            {
-              label: "Expenses",
-              data: expenseData,
-              backgroundColor: "#DF3554",
-              borderColor: "#D32F2F",
-              borderWidth: 1,
-            },
-          ],
-        });
-      } catch (error) {
-        console.error("❌ Error fetching chart data:", error);
-      }
-    };
-
-    loadData();
-  }, []);
+  useEffect(() => {
+    fetchData();
+  }, [refreshFlag]);
 
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        labels: {
-          color: "#EFE3C2",
-        },
+        labels: { color: "#EFE3C2" },
       },
     },
     scales: {
       x: {
-        ticks: {
-          color: "#EFE3C2",
-        },
-        grid: {
-          display: false,
-        },
+        ticks: { color: "#EFE3C2" },
+        grid: { display: false },
       },
       y: {
-        ticks: {
-          color: "#EFE3C2",
-        },
-        grid: {
-          color: "#E0E0E0",
-        },
+        ticks: { color: "#EFE3C2" },
+        grid: { color: "#E0E0E0" },
       },
     },
   };
 
-  if (!chartData) return <div style={{ color: "#EFE3C2" }}>Loading...</div>;
+  if (!chartData) return <div style={{ color: "#EFE3C2" }}>Loading chart...</div>;
 
   return (
     <div style={{ height: "400px", width: "100%" }}>

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import React from "react";
 import Navbar from "../components/Navbar";
 import PieChart from "../components/PieChart";
 import BarChart from "../components/BarChart";
@@ -8,29 +7,8 @@ import SavingsOverview from "../components/SavingsComponents/savingsLine"
 import TotalSavings from "../components/SavingsComponents/TotalSavings";
 import RemainingBudget from "../components/RemainingBudget";
 
-
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/login/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUser(res.data);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    };
-
-    fetchProfile();
-  }, []);
   return (
-    
     <div className="bg-greenDeep text-text min-h-screen p-6 lg:p-12">
       <Navbar />
 
@@ -63,7 +41,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
-              <h2 className="text-lg font-semibold">Saving vs Expense</h2>
+              <h2 className="text-lg font-semibold">Savings vs Expense</h2>
               <div className="mt-4 bg-text bg-opacity-10 rounded-2xl h-[350px] flex items-center justify-center">
                 <BarChart />
               </div>
@@ -81,7 +59,7 @@ const Dashboard = () => {
             <div className="bg-gradient-to-r from-greenMedium via-greenLight to-greenMedium p-6 rounded-2xl h-[140px] hover:scale-105 transition-transform duration-500 ease-in-out">
               <h2 className="text-lg font-semibold">Current Account</h2>
               <p className="text-3xl font-bold mt-2">₹ 100000</p>
-              <p className="text-sm mt-1">ICICI - {user ? `${user.firstName} ${user.lastName}` : "Loading..."}</p>
+              <p className="text-sm mt-1">ICICI - Haripriya Agrawal</p>
             </div>
           </div>
         </div>
