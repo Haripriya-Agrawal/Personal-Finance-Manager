@@ -6,6 +6,7 @@ function SignupPage() {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
+    currentBalance: "",
     email: "",
     password: "",
     termsAccepted: false,
@@ -76,6 +77,17 @@ function SignupPage() {
                 className="w-full px-4 py-2 bg-gray-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
+
+            <input
+              type="number"
+              name="currentBalance"
+              placeholder="Current Balance"
+              value={data.currentBalance}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 bg-gray-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+
 
             {/* Email and Password */}
             <input

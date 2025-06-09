@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import PieChart from "../components/PieChart";
 import BarChart from "../components/BarChart";
@@ -8,6 +9,31 @@ import TotalSavings from "../components/SavingsComponents/TotalSavings";
 import RemainingBudget from "../components/RemainingBudget";
 
 const Dashboard = () => {
+  const [currentBalance, setCurrentBalance] = useState(0);
+const [fullName, setFullName] = useState("");
+
+useEffect(() => {
+  async function fetchUserProfile() {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get("http://localhost:5000/api/user/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const { currentBalance, firstName, lastName } = response.data;
+      setCurrentBalance(currentBalance || 0);
+      setFullName(`${firstName} ${lastName}`);
+    } catch (error) {
+      console.error("Failed to fetch user profile", error);
+    }
+  }
+
+  fetchUserProfile();
+}, []);
+
+
   return (
     <div className="bg-greenDeep text-text min-h-screen p-6 lg:p-12">
       <Navbar />
@@ -19,7 +45,7 @@ const Dashboard = () => {
             {/* Stats Cards */}
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
               <h2 className="text-lg font-semibold">Current Balance</h2>
-              <p className="text-3xl font-bold mt-2">₹ 100000</p>
+              <p className="text-3xl font-bold mt-2">₹ {currentBalance}</p>
             </div>
             <div className="bg-greenMedium bg-opacity-30 p-6 rounded-2xl">
               <h2 className="text-lg font-semibold">Remaining Budget</h2>
@@ -58,8 +84,8 @@ const Dashboard = () => {
           <div className=" p-6 rounded-t-2xl h-1/3">
             <div className="bg-gradient-to-r from-greenMedium via-greenLight to-greenMedium p-6 rounded-2xl h-[140px] hover:scale-105 transition-transform duration-500 ease-in-out">
               <h2 className="text-lg font-semibold">Current Account</h2>
-              <p className="text-3xl font-bold mt-2">₹ 100000</p>
-              <p className="text-sm mt-1">ICICI - Haripriya Agrawal</p>
+              <p className="text-3xl font-bold mt-2">₹ {currentBalance}</p>
+              <p className="text-sm mt-1">ICICI - {fullName}</p>
             </div>
           </div>
         </div>

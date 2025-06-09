@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -13,64 +13,101 @@ import {
 
 ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
+const monthNames = [
+  "Jan", "Feb", "Mar", "Apr", "May", "June",
+  "July", "Aug", "Sept", "Oct", "Nov", "Dec"
+];
+
 const LineChart = () => {
-  const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"], // Replace with your months or time periods
+  const [chartData, setChartData] = useState({
+    labels: monthNames,
     datasets: [
       {
         label: "Cumulative Spending",
-        data: [100, 250, 400, 600, 900, 1200, 1500], // Example data
-        borderColor: "#21E6C1", // Tailwind indigo-600
-        backgroundColor: "greenMedium", // Transparent indigo
-        tension: 0.4, // Smooth curve
-        fill: true, // Fills area under the curve
+        data: new Array(12).fill(0),
+        borderColor: "#21E6C1",
+        backgroundColor: "greenMedium",
+        tension: 0.4,
+        fill: true,
       },
     ],
-  };
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch("http://localhost:5000/api/transaction", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const transactions = await res.json();
+        if (!Array.isArray(transactions)) return;
+
+        // Prepare monthly totals
+        const monthlyTotals = new Array(12).fill(0);
+
+        transactions.forEach((t) => {
+          const date = new Date(t.date);
+          const month = date.getMonth(); // 0 = Jan, 11 = Dec
+          monthlyTotals[month] += t.amount;
+        });
+
+        setChartData({
+          labels: monthNames,
+          datasets: [
+            {
+              label: "Cumulative Spending",
+              data: monthlyTotals,
+              borderColor: "#21E6C1",
+              backgroundColor: "greenMedium",
+              tension: 0.4,
+              fill: true,
+            },
+          ],
+        });
+      } catch (err) {
+        console.error("Error loading chart data", err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
-        position: "top",
-        labels: {
-          color: "#21E6C1", // Tailwind slate-800 for labels
-        },
-      },
-      title: {
-        display: false,
-        text: "Cumulative Spending Over Time",
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: true,
+      position: "top",
+      labels: {
         color: "#21E6C1",
-        font: {
-          size: 18,
-        },
       },
     },
-    scales: {
-      x: {
-        ticks: {
-          color: "#21E6C1", // Tailwind slate-800 for x-axis ticks
-        },
-        grid: {
-          display: false, // Hide x-axis gridlines
-        },
-      },
-      y: {
-        ticks: {
-          color: "#21E6C1", // Tailwind slate-800 for y-axis ticks
-        },
-        grid: {
-          color: "#21E6C1", // Tailwind gray-300 for gridlines
-        },
-      },
+  },
+  scales: {
+    x: {
+      ticks: { color: "#21E6C1" },
+      grid: { display: false },
     },
-  };
+    y: {
+      beginAtZero: true,
+      ticks: {
+        color: "#21E6C1",
+        callback: (value) => `₹${value}`, // Add currency symbol
+      },
+      grid: { color: "#21E6C1" },
+    },
+  },
+};
+
 
   return (
-    <div className="p-4 bg-none rounded ">
-      <Line data={data} options={options} />
+    <div className="p-4 bg-none rounded">
+      <Line data={chartData} options={options} />
     </div>
   );
 };

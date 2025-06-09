@@ -26,6 +26,7 @@ router.post("/", async (req, res) => {
                 _id: user._id, 
                 firstName: user.firstName, 
                 lastName: user.lastName, 
+                currentBalance: user.currentBalance,
                 email: user.email 
             } 
         });

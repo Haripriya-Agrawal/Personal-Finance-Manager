@@ -5,11 +5,15 @@ import Navbar from "../components/Navbar";
 import LineChart from "../components/LineChart";
 import BudgetChart from "../components/BudgetChart";
 import PieChart from "../components/PieChart";
+import BudgetPieChart from "../components/BudgetPieChart";
+import AllocatedBudgetChart from "../components/AllocatedBudgetChart";
+import BudgetList from "../components/BudgetList";
 
 
 const BudgetsPage=()=>{
   const [budgets, setBudgets] = useState([]);
   const [budgetId, setBudgetId] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     targetAmount: "",
     category: "", 
@@ -17,23 +21,27 @@ const BudgetsPage=()=>{
     endDate: "",
   });
 
-  useEffect(() => {
-    fetchBudgets();
-  }, []);
+  const [reloadBudgets, setReloadBudgets] = useState(0);
 
-  const fetchBudgets = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/budget", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+const handleAddOrUpdate = () => {
+  // after API call is successful:
+  setReloadBudgets((prev) => prev + 1); // trigger BudgetList reload
+};
 
-      const data = await response.json();
-      if (response.ok) setBudgets(data);
-    } catch (error) {
-      console.error("Error fetching budgets:", error);
-    }
-  };
+
+  const handleEdit = (budget) => {
+  console.log("Edit clicked for budget:", budget);
+  
+  setBudgetId(budget._id);  // Set the selected budget ID for editing
+  
+  // Populate the formData with the budget details
+  setFormData({
+    targetAmount: budget.targetAmount || "",
+    category: budget.category || "",
+    startDate: budget.startDate ? budget.startDate.split("T")[0] : "",  // format ISO date to YYYY-MM-DD
+    endDate: budget.endDate ? budget.endDate.split("T")[0] : "",
+  });
+};
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,8 +63,9 @@ const BudgetsPage=()=>{
       const data = await response.json();
       if (response.ok) {
         setFormData({ targetAmount: "", category: "", startDate: "", endDate: "" });
-        fetchBudgets();
-      } else {
+        setReloadBudgets(prev => prev + 1); // ✅ TRIGGER LIST RELOAD
+      }
+      else {
         alert(data.message || "Failed to add budget.");
       }
     } catch (error) {
@@ -86,8 +95,9 @@ const BudgetsPage=()=>{
       if (response.ok) {
         setBudgetId(null);
         setFormData({ targetAmount: "", category: "", startDate: "", endDate: "" });
-        fetchBudgets();
-      } else {
+        setReloadBudgets(prev => prev + 1); // ✅ TRIGGER LIST RELOAD
+      }
+      else {
         alert(data.message || "Failed to update budget.");
       }
     } catch (error) {
@@ -105,7 +115,7 @@ const BudgetsPage=()=>{
 
         <div className="flex flex-col w-1/3 gap-6 text-text">   
             <div className="h-1/3 w-full bg-greenMedium bg-opacity-30 p-6 rounded-lg">
-                <h1 className="text-xl text-text font-semibold mb-3">Add-Edit Budget</h1>
+                <h1 className="text-xl text-text font-semibold mb-3">Add Budget</h1>
                 <form className="space-y-2 mt-2 sm:space-y-3">
 
           <div className="flex flex-col sm:flex-row gap-2">
@@ -157,23 +167,25 @@ const BudgetsPage=()=>{
           
 
         <div className="flex flex-row gap-2">
-
-        <button
-            type="submit"
-            onClick={handleAddBudget}
-            className="flex justify-center items-center w-full sm:w-1/2 p-2 bg-greenDeep hover:bg-greenMedium rounded-lg font-semibold"
-          >
-            Add
-          </button>
-
-          <button
-            type="submit"
-            onClick={handleEditBudget}
-            className="flex justify-center items-center w-full sm:w-1/2 p-2 bg-greenDeep hover:bg-greenMedium rounded-lg font-semibold"
-          >
-            Edit
-          </button>
+          {!budgetId ? (
+            <button
+              type="submit"
+              onClick={handleAddBudget}
+              className="flex justify-center items-center w-full p-2 bg-greenDeep hover:bg-greenMedium rounded-lg font-semibold"
+            >
+              Add
+            </button>
+          ) : (
+            <button
+              type="submit"
+              onClick={handleEditBudget}
+              className="flex justify-center items-center w-full p-2 bg-greenDeep hover:bg-greenMedium rounded-lg font-semibold"
+            >
+              Update
+            </button>
+          )}
         </div>
+
           
         </form>
                 
@@ -181,7 +193,7 @@ const BudgetsPage=()=>{
             <div className="h-full w-full bg-greenMedium bg-opacity-30 p-6 rounded-lg ">
                 <h1 className="text-xl text-text mb-6" >Category wise budget</h1>
                 <div className="h-72">
-                  <PieChart/>
+                  <BudgetPieChart/>
                 </div>
                 
 
@@ -193,11 +205,11 @@ const BudgetsPage=()=>{
 
 
         <div className="flex flex-row h-full w-full gap-6">
-          
-        <div className="h-full w-2/5  p-6 bg-greenMedium bg-opacity-30 rounded-lg">
-        
-          <h1 className="text-xl text-text font-semibold mb-6">Insights</h1>
-          <p className="text-l text-text font-medium">Spent 30% more than expected on Food.</p>
+    
+          <div className="h-full w-2/5  p-6 bg-greenMedium bg-opacity-30 rounded-lg">         
+            <h1 className="text-xl text-text font-semibold mb-6">Current Budget Goals</h1>
+            <BudgetList onEdit={handleEdit} reloadTrigger={reloadBudgets} />
+
           </div>
 
           <div className="h-full w-3/5 bg-greenMedium bg-opacity-30 p-6 rounded-lg">
@@ -210,16 +222,12 @@ const BudgetsPage=()=>{
         <div className="h-full w-full  bg-greenMedium bg-opacity-30 rounded-lg p-6">
             <div className="flex flex-row gap-20  justify-center items-center">
             <h3 className="text-xl font-bold text-text ">Allocation Budget</h3>
-            <div className="flex gap-2">
-              <button className=" py-0 px-3 text-text bg-greenLight bg-opacity-30">Monthly</button>
-            <button className=" py-0 px-3 text-text bg-greenLight bg-opacity-30">Weekly</button>
-            </div>
-            <button className=" py-0 px-3 text-text bg-greenLight bg-opacity-30">Export</button>
+            
             </div>
 
             <div className="h-72 mt-6 flex items-center justify-center">
              
-              <BudgetChart className="h-auto"/>
+              <AllocatedBudgetChart className="h-auto"/>
             </div>
             
           </div>
