@@ -7,6 +7,7 @@ import PieChart from "../components/PieChart";
 import TransactionsList from "../components/TransactionList";
 import TotalExpenses from "../components/ExpensesComponents/ExpenseTotal";
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const Analytics = () => {
   const [transactions, setTransactions] = useState([]);
   const [maxExpense, setMaxExpense] = useState({ amount: 0, category: "" });
@@ -19,7 +20,7 @@ const Analytics = () => {
     const fetchTransactions = async () => {
       if (!token) return;
       try {
-        const res = await axios.get(`${process.env.base_backend_URL}/api/transaction`, {
+        const res = await axios.get(`${backendUrl}/api/transaction`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTransactions(res.data);
@@ -41,7 +42,7 @@ const Analytics = () => {
     const fetchAnalytics = async () => {
       if (!token) return;
       try {
-        const res = await axios.get(`${process.env.base_backend_URL}/api/analytics/spending?type=${viewType}`, {
+        const res = await axios.get(`${backendUrl}/api/analytics/spending?type=${viewType}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setLineChartData(res.data);

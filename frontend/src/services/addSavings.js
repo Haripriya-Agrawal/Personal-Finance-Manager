@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = `${process.env.base_backend_URL}/api/savings`;
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
+const API_URL = `${backendUrl}/api/savings`;
 
 export const addSavingsGoal = async (goalData) => {
   try {

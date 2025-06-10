@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const TotalExpenses = () => {
   const [transactions, setTransactions] = useState([]);
   const [activeTab, setActiveTab] = useState("Daily");
@@ -12,7 +12,7 @@ const TotalExpenses = () => {
       if (!token) return;
 
       try {
-        const res = await axios.get(`${process.env.base_backend_URL}/api/transaction`, {
+        const res = await axios.get(`${backendUrl}/api/transaction`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTransactions(res.data);

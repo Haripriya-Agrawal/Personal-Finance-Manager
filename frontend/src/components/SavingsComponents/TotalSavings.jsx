@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const TotalSavings = () => {
   const [totalSaved, setTotalSaved] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const TotalSavings = () => {
           return;
         }
 
-        const response = await axios.get(`${process.env.base_backend_URL}/api/savings`, {
+        const response = await axios.get(`${backendUrl}/api/savings`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

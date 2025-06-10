@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const BudgetList = ({ onEdit, reloadTrigger }) => {
   const [budgets, setBudgets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +10,7 @@ const BudgetList = ({ onEdit, reloadTrigger }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`${process.env.base_backend_URL}/api/budget`, {
+      const res = await axios.get(`${backendUrl}/api/budget`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

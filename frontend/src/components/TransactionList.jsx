@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const TransactionsList = () => {
   const [transactions, setTransactions] = useState([]);
 
@@ -14,7 +15,7 @@ const TransactionsList = () => {
       }
 
       try {
-        const response = await axios.get(`${process.env.base_backend_URL}/api/transaction`, {
+        const response = await axios.get(`${backendUrl}/api/transaction`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

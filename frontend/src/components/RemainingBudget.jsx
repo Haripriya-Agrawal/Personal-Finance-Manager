@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const RemainingBudget = () => {
   const [budgets, setBudgets] = useState([]);
   const [transactions, setTransactions] = useState([]);
@@ -13,10 +14,10 @@ const RemainingBudget = () => {
 
       try {
         const [budgetRes, transactionRes] = await Promise.all([
-          axios.get(`${process.env.base_backend_URL}/api/budget`, {
+          axios.get(`${backendUrl}/api/budget`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get(`${process.env.base_backend_URL}/api/transaction`, {
+          axios.get(`${backendUrl}/api/transaction`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);

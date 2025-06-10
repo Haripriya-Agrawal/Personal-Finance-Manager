@@ -9,7 +9,7 @@ import BudgetPieChart from "../components/BudgetPieChart";
 import AllocatedBudgetChart from "../components/AllocatedBudgetChart";
 import BudgetList from "../components/BudgetList";
 
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const BudgetsPage=()=>{
   const [budgets, setBudgets] = useState([]);
   const [budgetId, setBudgetId] = useState(null);
@@ -49,7 +49,7 @@ const handleAddOrUpdate = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.base_backend_URL}/api/budget`, {
+      const response = await fetch(`${backendUrl}/api/budget`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const handleAddOrUpdate = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.base_backend_URL}/api/budget/${budgetId}`, {
+      const response = await fetch(`${backendUrl}/api/budget/${budgetId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -5,6 +5,7 @@ import axios from "axios";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const BudgetPieChart = () => {
   const [budgets, setBudgets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ const BudgetPieChart = () => {
           return;
         }
 
-        const response = await axios.get(`${process.env.base_backend_URL}/api/budget`, {
+        const response = await axios.get(`${backendUrl}/api/budget`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

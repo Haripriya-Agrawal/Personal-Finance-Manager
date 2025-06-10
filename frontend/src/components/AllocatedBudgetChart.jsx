@@ -13,6 +13,7 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const AllocatedBudgetChart = () => {
   const [budgets, setBudgets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,7 +28,7 @@ const AllocatedBudgetChart = () => {
           return;
         }
 
-        const response = await fetch(`${process.env.base_backend_URL}/api/budget`, {
+        const response = await fetch(`${backendUrl}/api/budget`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

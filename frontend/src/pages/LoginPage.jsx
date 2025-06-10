@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 function LoginPage() {
   const navigate = useNavigate();
 
@@ -15,7 +16,7 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const url = `${process.env.base_backend_URL}/api/login`;
+      const url = `${backendUrl}/api/login`;
       const res = await axios.post(url, data);
   
       if (res.data?.token && res.data?.user) {

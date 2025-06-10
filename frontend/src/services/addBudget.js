@@ -1,11 +1,12 @@
 import axios from "axios";
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 
 export const addBudget = async (budgetData) => {
   try {
     const token = localStorage.getItem("token");
     if (!token) throw new Error("No authentication token found. Please log in again.");
 
-    const response = await axios.get(`${process.env.base_backend_URL}/api/budget`, {
+    const response = await axios.get(`${backendUrl}/api/budget`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

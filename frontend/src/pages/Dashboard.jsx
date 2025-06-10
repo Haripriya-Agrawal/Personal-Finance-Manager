@@ -8,6 +8,7 @@ import SavingsOverview from "../components/SavingsComponents/savingsLine"
 import TotalSavings from "../components/SavingsComponents/TotalSavings";
 import RemainingBudget from "../components/RemainingBudget";
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const Dashboard = () => {
   const [currentBalance, setCurrentBalance] = useState(0);
 const [fullName, setFullName] = useState("");
@@ -16,7 +17,7 @@ useEffect(() => {
   async function fetchUserProfile() {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`${process.env.base_backend_URL}/api/user/profile`, {
+      const response = await axios.get(`${backendUrl}/api/user/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

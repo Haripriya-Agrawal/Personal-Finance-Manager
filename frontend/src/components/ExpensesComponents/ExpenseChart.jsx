@@ -12,7 +12,7 @@ import {
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const CategoryExpenseChart = () => {
   const [expenseData, setExpenseData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,7 @@ const CategoryExpenseChart = () => {
           return;
         }
 
-        const response = await axios.get(`${process.env.base_backend_URL}/api/transaction`, {
+        const response = await axios.get(`${backendUrl}/api/transaction`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

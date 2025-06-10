@@ -13,7 +13,7 @@ import {
 } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const BudgetChart = () => {
   const [budgets, setBudgets] = useState([]);
   const [transactions, setTransactions] = useState([]);
@@ -25,12 +25,12 @@ const BudgetChart = () => {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const budgetRes = await fetch(`${process.env.base_backend_URL}/api/budget`, {
+        const budgetRes = await fetch(`${backendUrl}/api/budget`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const budgetData = await budgetRes.json();
 
-        const transactionRes = await fetch(`${process.env.base_backend_URL}/api/transaction`, {
+        const transactionRes = await fetch(`${backendUrl}/api/transaction`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const transactionData = await transactionRes.json();

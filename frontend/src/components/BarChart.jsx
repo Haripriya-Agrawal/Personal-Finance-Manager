@@ -11,7 +11,7 @@ import { Bar } from "react-chartjs-2";
 import axios from "axios";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const BarChart = () => {
   const [chartData, setChartData] = useState(null);
   const [refreshFlag, setRefreshFlag] = useState(false);
@@ -50,10 +50,10 @@ const BarChart = () => {
 
     try {
       const [txRes, savingRes] = await Promise.all([
-        axios.get(`${process.env.base_backend_URL}/api/transaction`, {
+        axios.get(`${backendUrl}/api/transaction`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get(`${process.env.base_backend_URL}/api/savings`, {
+        axios.get(`${backendUrl}/api/savings`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
 import axios from "axios";
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const Profile = ({ isProfileOpen, setProfileOpen }) => {
     const navigate = useNavigate(); 
 
@@ -18,7 +18,7 @@ const Profile = ({ isProfileOpen, setProfileOpen }) => {
         }
   
         try {
-          const response = await axios.get(`${process.env.base_backend_URL}/api/profile`, {
+          const response = await axios.get(`${backendUrl}/api/profile`, {
             headers: { Authorization: `Bearer ${token}` },
           });
   

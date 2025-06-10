@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const Milestone = () => {
   const [savings, setSavings] = useState([]);
   const [milestone, setMilestone] = useState(null);
@@ -13,7 +14,7 @@ const Milestone = () => {
           return;
         }
 
-        const response = await fetch(`${process.env.base_backend_URL}/api/savings`, {
+        const response = await fetch(`${backendUrl}/api/savings`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 
 ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const monthNames = [
   "Jan", "Feb", "Mar", "Apr", "May", "June",
   "July", "Aug", "Sept", "Oct", "Nov", "Dec"
@@ -37,7 +37,7 @@ const LineChart = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`${process.env.base_backend_URL}/api/transaction`, {
+        const res = await fetch(`${backendUrl}/api/transaction`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

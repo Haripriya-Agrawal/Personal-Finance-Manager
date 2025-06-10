@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const ExpenseForm = ({ fetchExpenses, form, setForm }) => {
   useEffect(() => {
     if (form.date) {
@@ -34,11 +34,11 @@ const ExpenseForm = ({ fetchExpenses, form, setForm }) => {
       let response;
       if (_id) {
         // Ensure _id is not empty before making a PUT request
-        response = await axios.put(`${process.env.base_backend_URL}/api/transaction/${_id}`, transactionData, {
+        response = await axios.put(`${backendUrl}/api/transaction/${_id}`, transactionData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        response = await axios.post(`${process.env.base_backend_URL}/api/transaction`, transactionData, {
+        response = await axios.post(`${backendUrl}/api/transaction`, transactionData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }

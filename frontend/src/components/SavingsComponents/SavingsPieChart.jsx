@@ -4,7 +4,7 @@ import { Pie } from "react-chartjs-2";
 import axios from "axios";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const SavingsPieChart = () => {
   const [savings, setSavings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +18,7 @@ const SavingsPieChart = () => {
           return;
         }
 
-        const response = await axios.get(`${process.env.base_backend_URL}/api/savings`, {
+        const response = await axios.get(`${backendUrl}/api/savings`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

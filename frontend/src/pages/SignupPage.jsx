@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 function SignupPage() {
   const [data, setData] = useState({
     firstName: "",
@@ -24,7 +25,7 @@ function SignupPage() {
     const { termsAccepted, ...submitData } = data;
   
     try {
-      const url = `${process.env.base_backend_URL}/api/user`;
+      const url = `${backendUrl}/api/user`;
       const { data: res } = await axios.post(url, submitData);
       console.log(res.message);
       navigate("/"); 
