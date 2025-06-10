@@ -59,13 +59,22 @@ const Analytics = () => {
       <Navbar />
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Column 1 */}
-        <div className="flex flex-col items-center h-auto bg-greenMedium bg-opacity-30 w-full lg:w-[350px] rounded-2xl p-4">
+        <div className="flex flex-col items-center bg-greenMedium bg-opacity-30 w-full lg:w-[350px] rounded-2xl p-4">
           <h1 className="text-xl font-semibold text-text p-4">Total Expenses</h1>
           <TotalExpenses />
           <h1 className="text-xl font-semibold text-text p-4">Transactions</h1>
-          <div className="bg-gradient-to-b from-greenMedium to-greenLight p-6 rounded-2xl h-auto w-full">
-            <div className="space-y-4">
-              <TransactionsList />
+          <div className="bg-gradient-to-b from-greenMedium to-greenLight p-4 rounded-2xl w-full flex-1 min-h-0 flex flex-col">
+            <div className="text-sm font-medium text-text mb-2 grid grid-cols-2 gap-2 px-2">
+              <span>Description</span>
+              <span className="text-right text-text">Amount</span>
+            </div>
+            <div className="flex-1 space-y-1 overflow-hidden">
+              {transactions.slice(0, 8).map((transaction, index) => (
+                <div key={index} className="grid grid-cols-2 gap-2 p-2 bg-white bg-opacity-20 rounded-lg text-xs">
+                  <span className="truncate">{transaction.title}</span>
+                  <span className="text-right font-semibold">₹{transaction.amount}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

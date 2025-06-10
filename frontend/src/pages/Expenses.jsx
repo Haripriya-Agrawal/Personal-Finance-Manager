@@ -7,6 +7,7 @@ import ExpenseChart from "../components/ExpensesComponents/ExpenseChart";
 import axios from "axios";
 
 const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
+
 const Expenses = () => {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({ category: "", minAmount: "", maxAmount: "" });
@@ -41,10 +42,10 @@ const Expenses = () => {
   });
 
   return (
-    <div className="min-h-screen bg-greenDeep text-text p-12">
+    <div className="min-h-screen bg-greenDeep text-text p-4 md:p-8 lg:p-12">
       <Navbar />
-      <div className="grid grid-cols-2 gap-6 p-6 bg-greenDeep">
-        <div className="flex flex-col">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="flex flex-col gap-6">
           {/* Add Expense Section */}
           <ExpenseForm form={form} setForm={setForm} fetchExpenses={fetchExpenses} />
 
@@ -52,24 +53,21 @@ const Expenses = () => {
           <ExpenseChart />
         </div>
 
-        <div>
-          {/* Search, Filter, and Transactions */}
-          <div className="flex flex-col gap-6 w-full">
-            {/* Search and Filter Section */}
-            <ExpenseFilters
-              search={search}
-              setSearch={setSearch}
-              filters={filters}
-              setFilters={setFilters}
-            />
+        <div className="flex flex-col gap-6">
+          {/* Search and Filter Section */}
+          <ExpenseFilters
+            search={search}
+            setSearch={setSearch}
+            filters={filters}
+            setFilters={setFilters}
+          />
 
-            {/* Transactions Section */}
-            <ExpenseList
-              expenses={filteredExpenses}
-              setForm={setForm}
-              fetchExpenses={fetchExpenses}
-            />
-          </div>
+          {/* Transactions Section */}
+          <ExpenseList
+            expenses={filteredExpenses}
+            setForm={setForm}
+            fetchExpenses={fetchExpenses}
+          />
         </div>
       </div>
     </div>
