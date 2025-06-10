@@ -46,10 +46,10 @@ const SavingsForm = ({ onGoalAdded, editingGoal, setEditingGoal  }) => {
 
         if (editingGoal?._id) {
             await updateSavingsGoal(editingGoal._id, formattedData);
-            alert("Goal updated successfully!");
+            
         } else {
             await addSavingsGoal(formattedData);
-            alert("Goal added successfully!");
+            
         }
 
         setData({ goalName: "", targetAmount: "", savedAmount: "", startDate: "", endDate: "" });

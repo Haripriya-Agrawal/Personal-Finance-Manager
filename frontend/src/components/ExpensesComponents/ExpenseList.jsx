@@ -1,5 +1,5 @@
 import axios from "axios";
-
+const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
 const ExpenseList = ({ expenses, setForm, fetchExpenses }) => {
   const handleDelete = async (id) => {
     try {
