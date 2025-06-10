@@ -15,7 +15,7 @@ const Expenses = () => {
   const fetchExpenses = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    const response = await axios.get("http://localhost:5000/api/transaction", {
+    const response = await axios.get(`${process.env.base_backend_URL}/api/transaction`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setExpenses(response.data);

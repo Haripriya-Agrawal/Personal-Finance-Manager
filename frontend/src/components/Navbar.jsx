@@ -9,9 +9,8 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Navbar */}
       <div className="flex justify-between items-center bg-greenDeep text-text p-4 rounded-lg mb-6">
-        {/* Mobile Menu Button */}
+   
         <button
           className="lg:hidden p-2"
           onClick={() => setMenuOpen(!isMenuOpen)}
@@ -21,7 +20,6 @@ const Navbar = () => {
 
         <div></div>
 
-        {/* Navigation Links (Hidden on small screens) */}
         <nav className="hidden lg:flex items-center gap-4">
           <a href="Dashboard" className="hover:underline  text-text">Dashboard</a>
           <span className="mx-1">•</span>
@@ -34,7 +32,6 @@ const Navbar = () => {
           <a href="Budgets" className="hover:underline  text-text">Budgets</a>
         </nav>
 
-        {/* Icons */}
         <div className="flex items-center gap-4">
           <Bell 
             className="w-6 h-6 cursor-pointer hover:text-gray-300"

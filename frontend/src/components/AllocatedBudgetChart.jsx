@@ -27,7 +27,7 @@ const AllocatedBudgetChart = () => {
           return;
         }
 
-        const response = await fetch("http://localhost:5000/api/budget", {
+        const response = await fetch(`${process.env.base_backend_URL}/api/budget`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -48,10 +48,8 @@ const AllocatedBudgetChart = () => {
   if (loading) return <p>Loading chart...</p>;
   if (!budgets.length) return <p>No budgets to display.</p>;
 
-  // Extract unique categories from budgets
   const categories = Array.from(new Set(budgets.map((b) => b.category)));
 
-  // Get all months covered by budgets
   const allMonthsSet = new Set();
   budgets.forEach(({ startDate, endDate }) => {
     const start = moment(startDate).startOf("month");
@@ -64,7 +62,6 @@ const AllocatedBudgetChart = () => {
   });
   const allMonths = Array.from(allMonthsSet).sort();
 
-  // Prepare budget data per month & category
   const budgetPerMonthCategory = {};
   allMonths.forEach((month) => {
     budgetPerMonthCategory[month] = {};
@@ -89,7 +86,6 @@ const AllocatedBudgetChart = () => {
     }
   });
 
-  // Colors for categories (expand if you have more categories)
   const colors = ["#73BBA3", "#88D66C", "#B4E380", "#F6FB7A", "#BFF6C3"];
 
   const data = {

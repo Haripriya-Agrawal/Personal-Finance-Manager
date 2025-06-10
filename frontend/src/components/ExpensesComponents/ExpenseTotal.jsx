@@ -12,7 +12,7 @@ const TotalExpenses = () => {
       if (!token) return;
 
       try {
-        const res = await axios.get("http://localhost:5000/api/transaction", {
+        const res = await axios.get(`${process.env.base_backend_URL}/api/transaction`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTransactions(res.data);

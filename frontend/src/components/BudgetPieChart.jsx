@@ -18,7 +18,7 @@ const BudgetPieChart = () => {
           return;
         }
 
-        const response = await axios.get("http://localhost:5000/api/budget", {
+        const response = await axios.get(`${process.env.base_backend_URL}/api/budget`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

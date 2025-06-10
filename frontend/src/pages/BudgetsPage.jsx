@@ -24,21 +24,19 @@ const BudgetsPage=()=>{
   const [reloadBudgets, setReloadBudgets] = useState(0);
 
 const handleAddOrUpdate = () => {
-  // after API call is successful:
-  setReloadBudgets((prev) => prev + 1); // trigger BudgetList reload
+  setReloadBudgets((prev) => prev + 1); 
 };
 
 
   const handleEdit = (budget) => {
   console.log("Edit clicked for budget:", budget);
   
-  setBudgetId(budget._id);  // Set the selected budget ID for editing
+  setBudgetId(budget._id);  
   
-  // Populate the formData with the budget details
   setFormData({
     targetAmount: budget.targetAmount || "",
     category: budget.category || "",
-    startDate: budget.startDate ? budget.startDate.split("T")[0] : "",  // format ISO date to YYYY-MM-DD
+    startDate: budget.startDate ? budget.startDate.split("T")[0] : "",  
     endDate: budget.endDate ? budget.endDate.split("T")[0] : "",
   });
 };
@@ -51,7 +49,7 @@ const handleAddOrUpdate = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/budget", {
+      const response = await fetch(`${process.env.base_backend_URL}/api/budget`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +80,7 @@ const handleAddOrUpdate = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:5000/api/budget/${budgetId}`, {
+      const response = await fetch(`${process.env.base_backend_URL}/api/budget/${budgetId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

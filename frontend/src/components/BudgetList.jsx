@@ -9,7 +9,7 @@ const BudgetList = ({ onEdit, reloadTrigger }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/budget", {
+      const res = await axios.get(`${process.env.base_backend_URL}/api/budget`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -29,7 +29,6 @@ const BudgetList = ({ onEdit, reloadTrigger }) => {
     }
   };
 
-  // ✅ Refetch when reloadTrigger changes
   useEffect(() => {
     fetchBudgets();
   }, [reloadTrigger]);

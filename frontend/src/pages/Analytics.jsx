@@ -19,7 +19,7 @@ const Analytics = () => {
     const fetchTransactions = async () => {
       if (!token) return;
       try {
-        const res = await axios.get("http://localhost:5000/api/transaction", {
+        const res = await axios.get(`${process.env.base_backend_URL}/api/transaction`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTransactions(res.data);
@@ -41,7 +41,7 @@ const Analytics = () => {
     const fetchAnalytics = async () => {
       if (!token) return;
       try {
-        const res = await axios.get(`http://localhost:5000/api/analytics/spending?type=${viewType}`, {
+        const res = await axios.get(`${process.env.base_backend_URL}/api/analytics/spending?type=${viewType}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setLineChartData(res.data);

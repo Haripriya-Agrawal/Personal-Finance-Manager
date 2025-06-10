@@ -14,7 +14,7 @@ const TotalSavings = () => {
           return;
         }
 
-        const response = await axios.get("http://localhost:5000/api/savings", {
+        const response = await axios.get(`${process.env.base_backend_URL}/api/savings`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

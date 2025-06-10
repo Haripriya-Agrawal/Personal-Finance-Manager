@@ -4,7 +4,7 @@ const ExpenseList = ({ expenses, setForm, fetchExpenses }) => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/transaction/${id}`, {
+      await axios.delete(`${process.env.base_backend_URL}/api/transaction/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchExpenses();

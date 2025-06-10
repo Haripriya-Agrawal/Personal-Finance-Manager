@@ -3,11 +3,10 @@ import axios from "axios";
 
 const ExpenseForm = ({ fetchExpenses, form, setForm }) => {
   useEffect(() => {
-    // Ensure date is formatted correctly when editing
     if (form.date) {
       setForm((prevForm) => ({
         ...prevForm,
-        date: new Date(form.date).toISOString().split("T")[0], // Format to yyyy-MM-dd
+        date: new Date(form.date).toISOString().split("T")[0], 
       }));
     }
   }, [form.date]);
@@ -20,14 +19,12 @@ const ExpenseForm = ({ fetchExpenses, form, setForm }) => {
         return;
       }
   
-      // Ensure the amount is a valid number
       const amount = Number(form.amount);
       if (isNaN(amount) || amount <= 0) {
         alert("Please enter a valid amount.");
         return;
       }
   
-      // Ensure the date is properly formatted
       const formattedDate = new Date(form.date).toISOString();
   
       const { _id, createdAt, updatedAt, __v,  ...transactionData } = form;
@@ -37,11 +34,11 @@ const ExpenseForm = ({ fetchExpenses, form, setForm }) => {
       let response;
       if (_id) {
         // Ensure _id is not empty before making a PUT request
-        response = await axios.put(`http://localhost:5000/api/transaction/${_id}`, transactionData, {
+        response = await axios.put(`${process.env.base_backend_URL}/api/transaction/${_id}`, transactionData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        response = await axios.post("http://localhost:5000/api/transaction", transactionData, {
+        response = await axios.post(`${process.env.base_backend_URL}/api/transaction`, transactionData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }

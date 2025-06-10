@@ -15,7 +15,7 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/api/login";
+      const url = `${process.env.base_backend_URL}/api/login`;
       const res = await axios.post(url, data);
   
       if (res.data?.token && res.data?.user) {

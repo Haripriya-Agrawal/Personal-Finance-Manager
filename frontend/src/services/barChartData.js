@@ -3,10 +3,10 @@ import axios from "axios";
 export const fetchChartData = async (token) => {
   try {
     const [savingsRes, expensesRes] = await Promise.all([
-      axios.get("http://localhost:5000/api/savings", {
+      axios.get(`${process.env.base_backend_URL}/api/savings`, {
         headers: { Authorization: `Bearer ${token}` },
       }),
-      axios.get("http://localhost:5000/api/transaction", {
+      axios.get(`${process.env.base_backend_URL}/api/transaction`, {
         headers: { Authorization: `Bearer ${token}` },
       }),
     ]);

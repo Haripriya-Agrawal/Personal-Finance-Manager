@@ -18,7 +18,7 @@ const Profile = ({ isProfileOpen, setProfileOpen }) => {
         }
   
         try {
-          const response = await axios.get("http://localhost:5000/api/profile", {
+          const response = await axios.get(`${process.env.base_backend_URL}/api/profile`, {
             headers: { Authorization: `Bearer ${token}` },
           });
   

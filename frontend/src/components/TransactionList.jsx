@@ -6,7 +6,7 @@ const TransactionsList = () => {
 
   useEffect(() => {
     const fetchTransactions = async () => {
-      const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
+      const token = localStorage.getItem("token"); 
 
       if (!token) {
         console.error("No token found");
@@ -14,13 +14,12 @@ const TransactionsList = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:5000/api/transaction", {
+        const response = await axios.get(`${process.env.base_backend_URL}/api/transaction`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        // Store only the top 6 transactions
         setTransactions(response.data.slice(0, 6));
       } catch (error) {
         console.error("Error fetching transactions:", error);

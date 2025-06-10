@@ -37,7 +37,7 @@ const LineChart = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/api/transaction", {
+        const res = await fetch(`${process.env.base_backend_URL}/api/transaction`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -46,12 +46,11 @@ const LineChart = () => {
         const transactions = await res.json();
         if (!Array.isArray(transactions)) return;
 
-        // Prepare monthly totals
         const monthlyTotals = new Array(12).fill(0);
 
         transactions.forEach((t) => {
           const date = new Date(t.date);
-          const month = date.getMonth(); // 0 = Jan, 11 = Dec
+          const month = date.getMonth(); 
           monthlyTotals[month] += t.amount;
         });
 

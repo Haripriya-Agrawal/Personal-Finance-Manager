@@ -13,10 +13,10 @@ const RemainingBudget = () => {
 
       try {
         const [budgetRes, transactionRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/budget", {
+          axios.get(`${process.env.base_backend_URL}/api/budget`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get("http://localhost:5000/api/transaction", {
+          axios.get(`${process.env.base_backend_URL}/api/transaction`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
