@@ -22,7 +22,6 @@ const SavingsPieChart = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log("✅ Savings Data:", response.data);
         setSavings(response.data);
         setLoading(false);
       } catch (error) {
@@ -37,7 +36,6 @@ const SavingsPieChart = () => {
   if (loading) return <p>Loading chart...</p>;
   if (!savings || savings.length === 0) return <p>No savings data available.</p>;
 
-  // Prepare data for Chart.js Pie Chart
   const labels = savings.map((item) => item.goalName);
   const values = savings.map((item) => item.savedAmount);
   const colors = ["#73BBA3", "#88D66C", "#B4E380", "#F6FB7A", "#BFF6C3"];

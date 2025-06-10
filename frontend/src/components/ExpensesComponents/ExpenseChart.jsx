@@ -30,9 +30,6 @@ const CategoryExpenseChart = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log("✅ Transactions:", response.data); // Debugging
-
-        // Group expenses by category
         const categoryTotals = response.data.reduce((acc, transaction) => {
           acc[transaction.category] = (acc[transaction.category] || 0) + transaction.amount;
           return acc;

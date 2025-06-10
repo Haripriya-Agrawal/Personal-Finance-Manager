@@ -52,7 +52,7 @@ function LoginPage() {
               className="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your email"
               value={data.email}
-              onChange={handleChange} // Added onChange
+              onChange={handleChange} 
               required
             />
           </div>
@@ -64,11 +64,11 @@ function LoginPage() {
               className="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your password"
               value={data.password}
-              onChange={handleChange} // Added onChange
+              onChange={handleChange} 
               required
             />
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>} {/* Display error message */}
+          {error && <p className="text-red-500 text-sm">{error}</p>} 
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"

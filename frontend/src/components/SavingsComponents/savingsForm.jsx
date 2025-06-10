@@ -14,7 +14,6 @@ const SavingsForm = ({ onGoalAdded, editingGoal, setEditingGoal  }) => {
 
   useEffect(() => {
     if (editingGoal && editingGoal._id) {
-        console.log("Editing Goal:", editingGoal);
         setData({
             ...editingGoal,
             startDate: editingGoal.startDate ? editingGoal.startDate.split("T")[0] : "",

@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import Joi from "joi";
 
-// Saving goal schema
 const savingsSchema = new mongoose.Schema(
 	{
 		userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },

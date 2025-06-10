@@ -23,7 +23,6 @@ const Milestone = () => {
         if (response.ok) {
           setSavings(data);
 
-          // Find the goal with the highest completion percentage
           if (data.length > 0) {
             const highestPercentageGoal = data.reduce((prev, curr) => {
               const prevPercent = (prev.savedAmount / prev.targetAmount) * 100;

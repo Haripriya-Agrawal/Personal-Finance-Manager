@@ -31,9 +31,6 @@ export const updateSavingsGoal = async (goalId, updatedData) => {
 
     const { _id, __v, createdAt, updatedAt, userId, ...cleanData } = updatedData;
 
-    console.log("Updating Savings Goal:", goalId);
-    console.log("Payload to backend:", cleanData);
-
     const response = await axios.put(`${API_URL}/${goalId}`, cleanData, {
       headers: {
         "Authorization": `Bearer ${token}`,

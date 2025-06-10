@@ -33,7 +33,6 @@ const ExpenseForm = ({ fetchExpenses, form, setForm }) => {
   
       let response;
       if (_id) {
-        // Ensure _id is not empty before making a PUT request
         response = await axios.put(`${backendUrl}/api/transaction/${_id}`, transactionData, {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -43,7 +42,6 @@ const ExpenseForm = ({ fetchExpenses, form, setForm }) => {
         });
       }
   
-      // alert("Expense saved successfully!");
       setForm({ _id: null, title: "", amount: "", category: "", date: "" });
       fetchExpenses();
     } catch (error) {

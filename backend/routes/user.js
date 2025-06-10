@@ -25,7 +25,6 @@ router.post("/", async (req, res) => {
 	}
 });
 
-// 🔹 Protected Route - Fetch User Details
 router.get("/profile", protect, async (req, res) => {
 	try {
 		const user = await User.findById(req.user.id).select("-password");

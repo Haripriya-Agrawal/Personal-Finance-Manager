@@ -42,7 +42,6 @@ router.post("/", protect, async (req, res) => {
 		return res.status(404).json({ message: "Budget not found" });
 	  }
   
-	  // Update budget fields
 	  budget.category = category || budget.category;
 	  budget.targetAmount = targetAmount || budget.targetAmount;
 	  budget.startDate = startDate || budget.startDate;

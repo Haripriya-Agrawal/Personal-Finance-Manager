@@ -21,8 +21,6 @@ const PieChart = () => {
         const response = await axios.get(`${backendUrl}/api/transaction`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
-        console.log("✅ Transactions Data:", response.data);
         setTransactions(response.data);
         setLoading(false);
       } catch (error) {
@@ -34,7 +32,6 @@ const PieChart = () => {
     fetchTransactions();
   }, []);
 
-  // Process transactions by category
   const categoryData = transactions.reduce((acc, { category, amount }) => {
     acc[category] = (acc[category] || 0) + amount;
     return acc;

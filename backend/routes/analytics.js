@@ -2,7 +2,6 @@ import express from "express";
 import { Transaction, validateTransaction } from "../models/transaction.js";
 const router = express.Router(); 
 
-// Get Analytics Data
 router.get("/:userId", async (req, res) => {
 	const transactions = await Transaction.find({ userId: req.params.userId });
 

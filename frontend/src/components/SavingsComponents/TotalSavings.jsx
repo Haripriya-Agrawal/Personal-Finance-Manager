@@ -18,14 +18,11 @@ const TotalSavings = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log("✅ Savings Data:", response.data); // Debugging
-
-        // Calculate total saved amount
         const total = response.data.reduce((sum, item) => sum + item.savedAmount, 0);
         setTotalSaved(total);
         setLoading(false);
       } catch (error) {
-        console.error("❌ Error fetching savings:", error);
+        console.error("Error fetching savings:", error);
         setLoading(false);
       }
     };

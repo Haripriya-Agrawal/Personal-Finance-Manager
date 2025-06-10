@@ -22,8 +22,6 @@ const BudgetPieChart = () => {
         const response = await axios.get(`${backendUrl}/api/budget`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
-        console.log("✅ Budget Data:", response.data);
         setBudgets(response.data);
         setLoading(false);
       } catch (error) {

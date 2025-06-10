@@ -96,7 +96,7 @@ const LineChart = () => {
       beginAtZero: true,
       ticks: {
         color: "#21E6C1",
-        callback: (value) => `₹${value}`, // Add currency symbol
+        callback: (value) => `₹${value}`, 
       },
       grid: { color: "#21E6C1" },
     },

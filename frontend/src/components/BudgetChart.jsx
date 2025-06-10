@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { Bar } from "react-chartjs-2";
@@ -13,7 +12,9 @@ import {
 } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
 const backendUrl = import.meta.env.VITE_BASE_BACKEND_URL;
+
 const BudgetChart = () => {
   const [budgets, setBudgets] = useState([]);
   const [transactions, setTransactions] = useState([]);
@@ -35,18 +36,35 @@ const BudgetChart = () => {
         });
         const transactionData = await transactionRes.json();
 
-        setBudgets(budgetData);
-        setTransactions(transactionData);
-        setLoading(false);
+        if (Array.isArray(budgetData)) {
+          setBudgets(budgetData);
+        } else {
+          console.warn("Budget data is not an array:", budgetData);
+          setBudgets([]);
+        }
+
+        if (Array.isArray(transactionData)) {
+          setTransactions(transactionData);
+        } else {
+          console.warn("Transaction data is not an array:", transactionData);
+          setTransactions([]);
+        }
+
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching data:", err);
+      } finally {
         setLoading(false);
       }
     };
+
     fetchData();
   }, []);
 
   if (loading) return <p>Loading chart...</p>;
+
+  if (!Array.isArray(budgets) || !Array.isArray(transactions)) {
+    return <p>Error loading chart data.</p>;
+  }
 
   const allMonthsSet = new Set();
 
@@ -114,12 +132,12 @@ const BudgetChart = () => {
       {
         label: "Spent",
         data: spentData,
-        backgroundColor: "#F87171", 
+        backgroundColor: "#F87171",
       },
       {
         label: "Remaining Budget",
         data: remainingData,
-        backgroundColor: "#34D399", 
+        backgroundColor: "#34D399",
       },
     ],
   };
@@ -127,7 +145,7 @@ const BudgetChart = () => {
   const options = {
     responsive: true,
     plugins: {
-      legend: { position: "top", labels: { color: "#374151" } }, 
+      legend: { position: "top", labels: { color: "#374151" } },
       tooltip: { enabled: true },
     },
     scales: {

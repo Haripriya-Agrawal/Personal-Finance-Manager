@@ -22,5 +22,4 @@ const validateTransaction = (data) => {
 	return schema.validate(data);
 };
 
-// Export in ES module format
 export { Transaction, validateTransaction };

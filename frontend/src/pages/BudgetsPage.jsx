@@ -61,7 +61,7 @@ const handleAddOrUpdate = () => {
       const data = await response.json();
       if (response.ok) {
         setFormData({ targetAmount: "", category: "", startDate: "", endDate: "" });
-        setReloadBudgets(prev => prev + 1); // ✅ TRIGGER LIST RELOAD
+        setReloadBudgets(prev => prev + 1); 
       }
       else {
         alert(data.message || "Failed to add budget.");
@@ -93,7 +93,7 @@ const handleAddOrUpdate = () => {
       if (response.ok) {
         setBudgetId(null);
         setFormData({ targetAmount: "", category: "", startDate: "", endDate: "" });
-        setReloadBudgets(prev => prev + 1); // ✅ TRIGGER LIST RELOAD
+        setReloadBudgets(prev => prev + 1); 
       }
       else {
         alert(data.message || "Failed to update budget.");

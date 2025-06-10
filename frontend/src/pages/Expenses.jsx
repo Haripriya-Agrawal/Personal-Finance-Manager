@@ -32,7 +32,6 @@ const Expenses = () => {
     { amount: 0, category: "" }
   );
 
-  // Apply search and filter logic
   const filteredExpenses = expenses.filter((expense) => {
     const matchesSearch = expense.title.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = filters.category ? expense.category === filters.category : true;
