@@ -11,8 +11,8 @@ It provides a dashboard-style interface to visualize expenses, savings, budgets,
 	•	🔐 User Authentication – Secure login and signup.
 
 🛠️ Tech Stack
-	•	Frontend: React, TypeScript, TailwindCSS, shadcn/ui, Recharts
+	•	Frontend: React, JavaScript, TailwindCSS, Chart.js
 	•	Backend: Node.js, Express
-	•	Database: MongoDB / PostgreSQL (depending on MERN or PERN variant)
+	•	Database: MongoDB 
 	•	Authentication: JWT
-	•	Deployment: Vercel (Frontend), Render/Heroku (Backend)
+	•	Deployment: Vercel (Frontend), Render (Backend)
